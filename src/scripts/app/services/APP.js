@@ -3,7 +3,7 @@ import * as ko from 'knockout';
 import 'knockout-postbox';
 import "knockout-amd-helpers";
 import {Authenticator} from './Authentication';
-import "../../../sass/test.scss";
+
 export let _APP = null
 export class APP {
 
@@ -71,12 +71,14 @@ export class APP {
         this.currentModule({name:'Dashboard',disposeMethod: 'dispose' });
       }
     });
+
     this.Router.add({
       path: '#/Login',
       on: ()=> {
         this.currentModule({name:'Login',disposeMethod: 'dispose' });
       }
     });
+
     this.Router.add({
       path: '#/:controller',
       on: (route)=> {

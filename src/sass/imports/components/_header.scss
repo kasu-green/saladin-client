@@ -1,0 +1,36 @@
+header {
+  height: auto;
+  background-color: $light-green;
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  z-index: 1000;
+
+  nav, aside {
+    width: 100%;
+    color: black;
+    max-width: 1024px;
+    height: 50px;
+    margin: 0px auto;
+    padding: 5px 0px;
+    background-color: $light-green;
+    box-shadow: none;
+  }
+  aside {
+    padding: 10px 0px;
+    height: inherit;
+  }
+
+  div {
+    width: auto;
+    height: 100%;
+  }
+
+  img{
+    height: 100%;
+  }
+
+  h2 {
+    line-height: inherit;
+  }
+
+} /* Fin Header */

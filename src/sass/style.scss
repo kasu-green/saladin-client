@@ -1,0 +1,158 @@
+/* basics class you can use on your project easily */
+/**
+ * Table of Contents
+ * 0 -   BASE
+		0.1 -   Fonts
+		0.2 -   Flexbox
+		0.3 -   General classes
+				- Containers
+				- Covers
+				- Backgrounds
+				- Dynamic lists
+		0.4 -	Prefixers
+**/
+
+@import 'imports/vars/reset';
+@import 'imports/vars/colors';
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-family: '---', Arial, verdana, arial, tahoma, sans-serif;
+	color: #000;
+	width: 100%;
+	font-size: 16px; /* Don't forget to select the good vars import at '0.1 - Fonts' */
+	line-height: 1.5em;
+}
+
+
+/* 0.1 - FONTS */
+/*
+	Font-size:
+	Fonts are converted in 'rem' to keep real proportions of body font-size,
+	you can convert it in 'em' if you like or create a new file for that.
+	I used w3schools converter and stop at the fourth number after the comma.
+	As you can see, you have the choice between 12px, 14px, 16px and 18px as base.
+	then use vars like : {font-size: $px20;}
+	/!\ Don't forget to comment the others, because all of them are using the same vars /!\
+*/
+// @import 'imports/12rem';
+@import 'imports/vars/14rem';
+// @import 'imports/16rem';
+// @import 'imports/18rem';
+
+// Custom font-families
+// $font-bold: '---';
+// $font-regular: '---';
+
+// Safe fonts (from: http://www.w3schools.com/cssref/css_websafe_fonts.asp )
+$serif-fonts: "Times New Roman", Georgia, serif;
+$sans-fonts: arial, verdana, tahoma, sans-serif;
+$monospace-fonts: "Courier New", Courier, monospace;
+
+// @font-face {
+// 	font-family: '---';
+// 	src: url('fonts/---.eot');
+// 	src: url('fonts/---.eot?#iefix') format('embedded-opentype'),
+// 		url('fonts/---.woff2') format('woff2'),
+// 		url('fonts/---.woff') format('woff'),
+// 		url('fonts/---.ttf') format('truetype'),
+// 		url('fonts/---.svg#---') format('svg');
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
+
+h1 {
+	font-size: $px45;
+  line-height: 1.5em;
+  font-family: $serif-fonts;
+}
+
+h2 {
+	font-size: $px36;
+  line-height: 1.5em;
+  font-family: $serif-fonts;
+}
+
+h3 {
+	font-size: $px24;
+}
+
+h4 {
+
+}
+
+p {
+
+}
+
+// strong {
+// 	font-family: '---';
+// }
+
+a {
+	text-decoration: none;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+
+
+/* 0.2 - FLEXBOX */
+@import 'imports/vars/flexbox';
+
+/* 0.3 - GENERAL CLASSES */
+.background {
+	background-position: center;
+    background-repeat: no-repeat;
+}
+.bg-cover {
+    background-size: cover;
+}
+.cover_container {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	padding: 0;
+}
+.cover {
+	position: relative;
+	width: 100%;
+	//max-width: 720px;
+	height: 100vh;
+	//@include viewport-unit(height, 100vh);
+	min-height: 100%;
+	margin: 0px auto;
+}
+
+.content_container {
+
+}
+
+section {
+	max-width: 1024px;
+	width: 100%;
+	margin: 0px auto;
+	padding: 70px 20px;
+}
+
+/* 04 - PREFIXER */
+.transition {
+	-webkit-transition: all ease-in 0.2s;
+	transition: all ease-in 0.2s;
+}
+
+@import 'imports/components/header';
+@import 'imports/components/autocomplete';
+@import 'imports/pages/userpage';
+@import 'imports/pages/createform';
+@import 'imports/pages/createsurvey';

@@ -1,8 +1,22 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchSubjects} from '../actions';
+
+
+
 import SubjectCell from './subject-cell';
+import SearchBar from './search-bar';
 
-export default class SubjectList extends Component{
+class SubjectList extends Component{
+  componentDidMount(){
+    this.props.fetchSubjects();
+  }
 
+  renderSubjects(){
+    return this.props.subjects.map(subject=>{
+      return <SubjectCell key={subject.id} subject={subject}/>
+    });
+  }
   render(){
     return (
       <div>
@@ -18,20 +32,16 @@ export default class SubjectList extends Component{
           </div>
         </nav>
       </header>
+
       <section className="flex flex-column align-center just-center">
+        <SearchBar/>
         <form id="userSearchForm" action="" className="flex align-center">
 
           <button id="btnSearch" className="background bg-cover"></button>
         </form>
 
         <ul id="listSubjects" className="collection">
-          <SubjectCell/>
-          <SubjectCell/>
-          <SubjectCell/>
-          <SubjectCell/>
-          <SubjectCell/>
-          <SubjectCell/>
-          <SubjectCell/>
+          {this.renderSubjects()}
         </ul>
 
         <div className="fixed-action-btn">
@@ -47,3 +57,13 @@ export default class SubjectList extends Component{
     );
   }
 }
+
+function mapStateToProps({subjects}){
+  const {filter, data} = subjects;
+  return {
+    subjects: data.filter( (item) => {
+        return (item.identifier.startsWith(filter) || item.custom_field.includes(filter))
+      } )};
+}
+
+export default connect(mapStateToProps,{fetchSubjects})(SubjectList);

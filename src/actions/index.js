@@ -1,6 +1,8 @@
 
 export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
+export const ADD_SUBJECT = 'ADD_SUBJECT';
+
 
 export function searchSubjects(term){
   return {
@@ -8,6 +10,14 @@ export function searchSubjects(term){
     term: term
   }
 }
+
+export function addSubject(identifier,custom_field){
+  return {
+    type: ADD_SUBJECT,
+    subject: {identifier,custom_field}
+  }
+}
+
 export function fetchSubjects(){
 
   return {

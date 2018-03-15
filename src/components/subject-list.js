@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchSubjects} from '../actions';
-
+import {Link} from 'react-router-dom';
 
 
 import SubjectCell from './subject-cell';
@@ -45,9 +45,9 @@ class SubjectList extends Component{
         </ul>
 
         <div className="fixed-action-btn">
-          <a id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
+          <Link to="/subjects/add" id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
             <i className="material-icons">add</i>
-          </a>
+          </Link>
         </div>
 
       </section>
@@ -62,6 +62,7 @@ function mapStateToProps({subjects}){
   const {filter, data} = subjects;
   return {
     subjects: data.filter( (item) => {
+        console.log(item);
         return (item.identifier.startsWith(filter) || item.custom_field.includes(filter))
       } )};
 }

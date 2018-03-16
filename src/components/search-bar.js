@@ -4,7 +4,7 @@ import {searchSubjects} from '../actions';
  class SearchBar extends Component{
   render(){
     return (
-      <form id="userSearchForm" action="" className="flex align-center">
+      <form id="userSearchForm" onSubmit={(e)=>{e.preventDefault()}} action="" className="flex align-center">
           <input type="text" placeholder="Search here" onChange={(e)=>{this.props.searchSubjects(e.target.value)}}/>
           <button id="btnSearch" className="background bg-cover"></button>
       </form>

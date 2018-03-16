@@ -6,39 +6,26 @@ import {Link} from 'react-router-dom';
 
 import SubjectCell from './subject-cell';
 import SearchBar from './search-bar';
-
+import Header from './header';
 class SubjectList extends Component{
   componentDidMount(){
+    console.log('mount');
     this.props.fetchSubjects();
   }
 
   renderSubjects(){
     return this.props.subjects.map(subject=>{
-      return <SubjectCell key={subject.id} subject={subject}/>
+      return <SubjectCell key={subject._id} subject={subject}/>
     });
   }
   render(){
     return (
       <div>
-      <header>
-        <nav className="flex align-center just-between">
-          <div className="flex">
-            <img src="img/salad.png" alt="logo Saladin"/>
-            <h2 className="self-center">Sujets</h2>
-          </div>
-          <div className="flex">
-            <div id="btnLinksList"></div>
-            <button id="logout">logout</button>
-          </div>
-        </nav>
-      </header>
+      <Header title="Sujets"/>
 
       <section className="flex flex-column align-center just-center">
         <SearchBar/>
-        <form id="userSearchForm" action="" className="flex align-center">
 
-          <button id="btnSearch" className="background bg-cover"></button>
-        </form>
 
         <ul id="listSubjects" className="collection">
           {this.renderSubjects()}
@@ -62,8 +49,13 @@ function mapStateToProps({subjects}){
   const {filter, data} = subjects;
   return {
     subjects: data.filter( (item) => {
-        console.log(item);
-        return (item.identifier.startsWith(filter) || item.custom_field.includes(filter))
+        if(!item.custom_field){
+          item.custom_field = "";
+        }
+        const number = item.number.toLowerCase();
+        const custom_field = item.custom_field.toLowerCase();
+
+        return (number.startsWith(filter) || (custom_field.includes(filter)))
       } )};
 }
 

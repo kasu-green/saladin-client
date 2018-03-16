@@ -1,8 +1,12 @@
+import axios from 'axios';
 
 export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
 export const ADD_SUBJECT = 'ADD_SUBJECT';
+export const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
 
+const ROOT_URL= 'http://localhost:3000/';
+const API_KEY = '?key=abcdef';
 
 export function searchSubjects(term){
   return {
@@ -11,39 +15,29 @@ export function searchSubjects(term){
   }
 }
 
-export function addSubject(identifier,custom_field){
+
+export function addSubject(){
+  const URL = `${ROOT_URL}subjects${API_KEY}`;
+  var request = axios.post(URL,{});
   return {
     type: ADD_SUBJECT,
-    subject: {identifier,custom_field}
+    subject: request
+  }
+}
+export function saveSubject(number,custom_field){
+  const URL = `${ROOT_URL}subjects/${number}${API_KEY}`;
+  var request = axios.post(URL,{custom_field});
+  return {
+    type: UPDATE_SUBJECT,
+    subject: request
   }
 }
 
 export function fetchSubjects(){
-
+  const URL = `${ROOT_URL}subjects${API_KEY}`;
+  var request = axios.get(URL);
   return {
     type:FETCH_SUBJECTS,
-    payload:{
-      data:[
-        {
-          id: 12,
-          identifier: "498382",
-          custom_field: "Mr Fabien Di Tore",
-          last_survey: '2018-03-12'
-
-        },
-        {
-          id: 13,
-          identifier: "99898",
-          custom_field: "Mr Fabien Di Tore",
-          last_survey: '2018-03-12'
-        },
-        {
-          id: 14,
-          identifier: "303030303",
-          custom_field: "Mr Fabien Di Tore",
-          last_survey: '2018-03-12'
-        }
-      ]
-    }
+    payload:request
   }
 }

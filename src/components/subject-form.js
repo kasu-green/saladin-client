@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router';
-
 import {connect} from 'react-redux';
-import {addSubject} from '../actions';
+import {Link} from 'react-router-dom';
+
+import {addSubject,saveSubject} from '../actions';
 class SubjectForm extends Component{
 
   constructor(props){
@@ -12,39 +12,53 @@ class SubjectForm extends Component{
     this.submitForm = this.submitForm.bind(this);
   }
 
+  componentDidMount(){
+    const promise = this.props.addSubject();
+
+    promise.subject.then(data=>{
+
+      this.setState({number:data.data.number});
+    });
+  }
+
   submitForm(e){
-    debugger;
+
     e.preventDefault();
-    this.props.addSubject(this.state.identifier,this.state.custom_field);
-    this.setState({redirect:true});
-    <Redirect to="/subjects"/>
-    //window.location.href='/subjects';
-    this.props.history.push('/subjects');
+    const promise = this.props.saveSubject(this.state.number,this.state.custom_field);
+    promise.subject.then(data=>{
+
+          this.props.history.push('/subjects');
+    }).catch(error=>{
+      alert('error occured');
+    });
+
+
   }
   render(){
     if(this.state.redirect){
     //  return <Redirect to="/subjects"/>
     }
     return (
-
+      <div>
+        <h3>Créer un nouveau sujet</h3>
         <form onSubmit={this.submitForm} className="col s12">
           <div className="row">
             <div className="input-field col s6">
-              <input placeholder="Placeholder" onChange={(e)=>{this.setState({identifier:e.target.value})}} id="first_name" type="text" className="validate" />
-              <label htmlFor="first_name">First Name</label>
+              <input placeholder="Placeholder" value={this.state.number} disabled  type="text" className="validate" />
+              <label htmlFor="first_name">Numero patient</label>
             </div>
             <div className="input-field col s6">
               <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
-              <label htmlFor="last_name">Last Name</label>
+              <label htmlFor="last_name">Champ personnalisé</label>
             </div>
           </div>
-          <button >Create</button>
-
+          <button className="btn">Create</button>
+          <Link to="/subjects" className="btn ">Cancel</Link>
         </form>
-
+      </div>
 
     );
   }
 }
 
-export default connect(null,{addSubject})(SubjectForm);
+export default connect(null,{addSubject,saveSubject})(SubjectForm);

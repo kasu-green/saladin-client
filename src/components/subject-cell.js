@@ -11,7 +11,7 @@ export default function render(props){
               {props.subject.number}
               {props.subject.custom_field}
               {props.subject.last_survey}
-
+              
                 <i className="material-icons">delete</i>
                   <Link to ={"/survey/"+props.subject.number} className="secondary-content">
                     <i className="material-icons">navigate_next</i>

@@ -3,9 +3,12 @@ import axios from 'axios';
 export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
 export const ADD_SUBJECT = 'ADD_SUBJECT';
+export const ADD_SURVEY = 'ADD_SURVEY';
 export const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
 
 export const FETCH_SURVEYS = 'FETCH_SURVEYS';
+
+export const ADD_SURVEY_DAY = 'ADD_SURVEY_DAY';
 
 const ROOT_URL= 'http://localhost:3000/';
 const API_KEY = '?key=abcdef';
@@ -54,4 +57,21 @@ export function fetchSurveys(subject_number){
     type:FETCH_SURVEYS,
     payload:request
   }
+}
+
+export function addSurvey(subject_number,values){
+  const URL = `${ROOT_URL}surveys/${subject_number}${API_KEY}`;
+  var request = axios.post(URL,values);
+  return {
+    type:ADD_SURVEY,
+    payload:request
+  }
+
+}
+
+export function addSurveyDay(date){
+  return {
+    type: ADD_SURVEY_DAY,
+    payload:date
+  };
 }

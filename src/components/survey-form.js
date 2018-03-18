@@ -1,50 +1,113 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import {addSurvey,addSurveyDay} from '../actions';
+import 'react-widgets/dist/css/react-widgets.css';
+import { Calendar } from 'react-widgets'
 
 
+import moment from 'moment';
 class SurveyForm extends Component {
-
-
-
-  submitForm(e){
-
-    e.preventDefault();
-
+  constructor(props){
+    super(props);
+    debugger;
+    this.state = {subject_number:this.props.match.params.subject_number};
 
   }
+
+
+  submitForm(values){
+
+    //e.preventDefault();
+    console.log(values);
+  //  this.props.addSurvey(this.state.subject_number,values);
+  }
+
+  renderField(field){
+    return (
+      <div className="input-field col s6">
+      <input type="text" {...field.input} {...field.rest}/>
+      <label htmlFor="last_name">{field.label}</label>
+      {field.meta.error}
+      </div>
+    );
+  }
+  renderDatePicker(field){
+    const {input, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
+    debugger;
+    return (<div>
+          <DatePicker {...input} {...rest} dateFormat="DD/MM/YYYY" selected={defaultValue} />
+          {touched && error && <span>{error}</span>}
+    </div>);
+  };
+
+  handleChange(date) {
+    console.log(date);
+    debugger;
+    this.setState({dateToAdd:date});
+    this.props.addSurveyDay(date.format('YYYY-MM-DD'));
+
+  }
+
+  renderDayList(){
+
+    return this.props.survey.days.map((item)=>{
+      return (<li>{item.date}</li>)
+    });
+  }
+
     render(){
+      const {handleSubmit} = this.props;
       return (
-        <div>
-          <h3>Nouvelle enquête</h3>
-          <form onSubmit={this.submitForm} className="col s12">
+        <div>{this.props.initialValues.date}
+          <h3>Nouvelle enquête: Sujet: {this.state.subject_number}</h3>
+          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
             <div className="row">
 
-              <div className="input-field col s6">
-                <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
-                <label htmlFor="last_name">Début</label>
-              </div>
+                <Field name="survey_date" label="Date de Consultation"   type="text" component="input"></Field>
             </div>
             <div className="row">
-
-              <div className="input-field col s6">
-                <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
-                <label htmlFor="last_name">Fin</label>
-              </div>
+              <Field name="comment" label=" Commentaire" component="input"></Field>
             </div>
+
+
             <div className="row">
+              <Calendar
 
-              <div className="input-field col s6">
-                <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
-                <label htmlFor="last_name">Commentaire</label>
-              </div>
+              />
             </div>
-            <button className="btn">Create</button>
-            <Link to={"/survey/"+this.props.match.params.subject_number} className="btn ">Cancel</Link>
+
+            <ul>
+            {this.renderDayList()}
+            </ul>
+
+            <button className="btn">Enregistrer</button>
+
           </form>
         </div>
 
       )
     }
 }
+/*      <button className="btn">Create</button>
+      <Link to={"/survey/"+this.state.subject_number} className="btn ">Cancel</Link>*/
+
+function validate(values ){
+  const errors = {};
+  console.log(values);
+  return errors;
+}
+SurveyForm = reduxForm({
+  validate,
+  form:'addSurvey'
+})(SurveyForm);
+
+SurveyForm =   connect(
+    state => ({
+    initialValues: state.survey.survey, // pull initial values from account reducer
+    survey : state.survey
+  }),{addSurvey,addSurveyDay}
+  )(SurveyForm);
 
 export default SurveyForm;

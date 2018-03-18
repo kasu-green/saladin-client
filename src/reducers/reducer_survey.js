@@ -1,16 +1,60 @@
-import {FETCH_SURVEYS} from '../actions/index';
-import _ from 'lodash';
 
+//survey editor reducers
+
+/*
+
+
+  day structure is :
+
+  {
+    date: "2017-01-01",
+    periods:[]
+  }
+
+  periods structure:
+
+  {
+    key="breakfast",
+    foods:[]
+  }
+
+
+  food structure is :
+    {
+      id:1002,
+      qty: 500,
+      components:[],
+    }
+
+
+  component = {
+    id:0,
+    name:303,
+    unit: 'mg',
+    value: 70
+  }
+
+
+*/
+
+import moment from 'moment';
+import {ADD_SURVEY_DAY} from '../actions';
 const initialState = {
-  filter:'',
-  data:[]
+  survey:{
+    _id:0,
+    survey_date: moment().format('DD/MM/YYYY'),
+    comment:'prout'
+  },
+  days:[]
 }
 
 export default function (state=initialState,action){
   switch(action.type){
-    case FETCH_SURVEYS:
+    case ADD_SURVEY_DAY:
     
-        return Object.assign({},state,{data:action.payload.data});
+    const newState = Object.assign({},state,{survey:state.survey,days:[{date:action.payload}, ...state.days]});
+    console.log(newState);
+     return newState;
     break;
     default:
       return state;

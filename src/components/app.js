@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch,browserHistory} from 'react-router-dom';
 import SubjectList from './subject-list';
 import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
+import SurveyForm from './survey-form';
 export default class App extends Component {
   render() {
     return (
@@ -13,7 +14,8 @@ export default class App extends Component {
 
             <Route path="/subjects/add" component={SubjectForm}/>
             <Route path="/subjects" component={SubjectList}/>
-            <Route path="/survey" component={SurveyList}/>
+            <Route path="/survey/:subject_number/add" component={SurveyForm}/>
+            <Route path="/survey/:subject_number" component={SurveyList}/>
             <Route path="/" component={Login}/>
           </Switch>
         </div>

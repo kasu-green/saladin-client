@@ -11,7 +11,7 @@ export default class App extends Component {
       <BrowserRouter history={browserHistory}>
         <div>
           <Switch>
-
+            <Route path="/diary/:subject_number/:diary_date"/>
             <Route path="/subjects/add" component={SubjectForm}/>
             <Route path="/subjects" component={SubjectList}/>
             <Route path="/survey/:subject_number/add" component={SurveyForm}/>

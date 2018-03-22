@@ -151,6 +151,12 @@ section {
 	transition: all ease-in 0.2s;
 }
 
+.collection-list li{
+	border-top: 1px solid black;
+	border-bottom:1px solid black;
+	min-height:44px;
+}
+
 @import 'imports/components/header';
 @import 'imports/components/autocomplete';
 @import 'imports/pages/userpage';

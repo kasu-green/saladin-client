@@ -4,14 +4,17 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import {addSurvey,addSurveyDay} from '../actions';
 import 'react-widgets/dist/css/react-widgets.css';
-import { Calendar } from 'react-widgets'
 
+import Moment from 'moment';
+import momentLocalizer from 'react-widgets-moment';
+import { Calendar } from 'react-widgets';
 
-import moment from 'moment';
+Moment.locale('fr');
+momentLocalizer();
 class SurveyForm extends Component {
   constructor(props){
     super(props);
-    debugger;
+
     this.state = {subject_number:this.props.match.params.subject_number};
 
   }
@@ -50,10 +53,14 @@ class SurveyForm extends Component {
 
   }
 
+  newDiary(date){
+    this.props.addSurveyDay(date);
+    console.log(date);
+  }
   renderDayList(){
 
     return this.props.survey.days.map((item)=>{
-      return (<li>{item.date}</li>)
+      return (<li key={item.date}>{item.date}</li>)
     });
   }
 
@@ -64,7 +71,6 @@ class SurveyForm extends Component {
           <h3>Nouvelle enquête: Sujet: {this.state.subject_number}</h3>
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
             <div className="row">
-
                 <Field name="survey_date" label="Date de Consultation"   type="text" component="input"></Field>
             </div>
             <div className="row">
@@ -74,12 +80,12 @@ class SurveyForm extends Component {
 
             <div className="row">
               <Calendar
-
+                onChange={(value)=>{this.newDiary(value)}}
               />
             </div>
 
-            <ul>
-            {this.renderDayList()}
+            <ul className="collection-list">
+              {this.renderDayList()}
             </ul>
 
             <button className="btn">Enregistrer</button>
@@ -98,6 +104,7 @@ function validate(values ){
   console.log(values);
   return errors;
 }
+
 SurveyForm = reduxForm({
   validate,
   form:'addSurvey'

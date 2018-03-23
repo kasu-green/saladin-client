@@ -4,10 +4,9 @@ export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
 export const ADD_SUBJECT = 'ADD_SUBJECT';
 export const ADD_SURVEY = 'ADD_SURVEY';
+export const FETCH_SURVEY = 'FETCH_SURVEY';
 export const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
-
 export const FETCH_SURVEYS = 'FETCH_SURVEYS';
-
 export const ADD_SURVEY_DAY = 'ADD_SURVEY_DAY';
 
 const ROOT_URL= 'http://localhost:3000/';
@@ -55,6 +54,15 @@ export function fetchSurveys(subject_number){
   var request = axios.get(URL);
   return {
     type:FETCH_SURVEYS,
+    payload:request
+  }
+}
+
+export function fetchSurvey(subject_number,survey_id){
+  const URL = `${ROOT_URL}surveys/${subject_number}/${survey_id}${API_KEY}`;
+  var request = axios.get(URL);
+  return {
+    type:FETCH_SURVEY,
     payload:request
   }
 }

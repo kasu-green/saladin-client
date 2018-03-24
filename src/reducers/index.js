@@ -3,11 +3,17 @@ import { reducer as formReducer } from 'redux-form';
 import SubjectReducer from './reducer_subject';
 import SurveyListReducer from './reducer_surveylist';
 import SurveyReducer from './reducer_survey';
+import FoodSearch from './reducer_foodsearch';
+import LocaleReducer from './reducer-locale';
+import DiaryReducer from './reducer_diary';
 const rootReducer = combineReducers({
-  subjects: SubjectReducer,
-  surveys: SurveyListReducer,
-  survey: SurveyReducer,
-  form: formReducer
+  subjects: SubjectReducer, // current list of subjects
+  surveys: SurveyListReducer, // current list of surveys
+  survey: SurveyReducer, // current survey
+  diary: DiaryReducer, // current diary
+  form: formReducer,
+  foods: FoodSearch, // current food search
+  locale: LocaleReducer // current locale
 });
 
 export default rootReducer;

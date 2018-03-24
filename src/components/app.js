@@ -6,7 +6,7 @@ import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
 import SurveyForm from './survey-form';
 
-import DiaryForm from './diary-form';
+import Diary from './diary';
 export default class App extends Component {
   render() {
     return (
@@ -14,7 +14,7 @@ export default class App extends Component {
         <div>
           <Switch>
             <Route path="/survey/:subject_number/edit/:survey_id" component={SurveyForm}/>
-            <Route path="/diary/:subject_number/:diary_date" component={DiaryForm}/>
+            <Route path="/diary/:survey_id/:diary_date" component={Diary}/>
             <Route path="/subjects/add" component={SubjectForm}/>
             <Route path="/subjects" component={SubjectList}/>
 

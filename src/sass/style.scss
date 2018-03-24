@@ -162,3 +162,22 @@ section {
 @import 'imports/pages/userpage';
 @import 'imports/pages/createform';
 @import 'imports/pages/createsurvey';
+
+
+.autocomplete{
+	display:none;
+}
+.autocomplete.visible{
+	display:block;
+}
+
+.autocomplete li{
+	border-top:1px solid black;
+	:last-child{
+		border-bottom: 1px solid black;
+	}
+}
+
+.autocomplete li:last-child{
+	border-bottom: 1px solid black;
+}

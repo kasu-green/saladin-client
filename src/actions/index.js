@@ -68,6 +68,7 @@ export function fetchSurvey(subject_number,survey_id){
 }
 
 export function addSurvey(subject_number,values){
+  console.log('submitting survey',values);
   const URL = `${ROOT_URL}surveys/${subject_number}${API_KEY}`;
   var request = axios.post(URL,values);
   return {
@@ -77,9 +78,12 @@ export function addSurvey(subject_number,values){
 
 }
 
-export function addSurveyDay(date){
+export function addSurveyDay(date,survey_id){
+  //localhost:3000/diary/5ab678f57906b24357185263/?key=abcdef
+  const URL = `${ROOT_URL}diary/${survey_id}${API_KEY}`;
+  var request = axios.post(URL,{date});
   return {
     type: ADD_SURVEY_DAY,
-    payload:date
+    payload:request
   };
 }

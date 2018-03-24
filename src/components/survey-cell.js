@@ -11,7 +11,7 @@ export default function render(props){
              Enquête du <Moment format="DD/MM/YYYY">{props.survey.date || "N/A"}</Moment>
 
               {props.survey.comment}
-              <Link to="/survey/">
+              <Link to={"/survey/"+props.subject_number+"/edit/"+props.survey._id}>
                 <i className="material-icons">navigate_next</i>
               </Link>
             </div>

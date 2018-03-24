@@ -79,13 +79,17 @@ class SurveyForm extends Component {
   }
 
   newDiary(date){
-    this.props.addSurveyDay(date);
+    date = Moment(date).format('YYYY-MM-DD');
+    debugger;
+    date+='Z';
+    this.props.addSurveyDay(date,this.props.survey._id);
     console.log(date);
   }
   renderDiariesList(){
 
     return this.props.survey.diaries.map((item)=>{
-      return (<li key={item.date}><Link to={"/diary/"+this.state.subject_number+"/"+item.date}>{item.date}</Link></li>)
+      let date = Moment(item.date).format('DD-MM-YYYY');
+      return (<li key={item.date}><Link to={"/diary/"+this.state.subject_number+"/"+date}>{date}</Link> {item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée"}</li>)
     });
   }
   renderDiary(){
@@ -113,7 +117,7 @@ class SurveyForm extends Component {
           <h3>Nouvelle enquête: Sujet: {this.state.subject_number}</h3>
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
             <div className="row">
-                <Field name="survey_date" placeholder="Commentaire" label="Date de Consultation"   type="text" component="input"></Field>
+                <Field name="date" placeholder="Commentaire" label="Date de Consultation"   type="text" component="input"></Field>
             </div>
             <div className="row">
               <Field name="comment" placeholder="Commentaire" label=" Commentaire" component="input"></Field>

@@ -14,7 +14,7 @@ class DiaryForm extends Component {
       diary_date:this.props.match.params.diary_date
     };
 
-    
+
     debugger;
   }
 

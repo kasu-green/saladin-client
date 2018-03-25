@@ -15,6 +15,7 @@ export const ADD_INGESTA = 'ADD_INGESTA';
 
 export const ROOT_URL= 'http://localhost:3000/';
 export const API_KEY = '?key=abcdef';
+export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
 
 export const getAPIUrl=(urlpart)=>{
   return `${ROOT_URL}${urlpart}${API_KEY}`;
@@ -134,6 +135,18 @@ export function addIngesta(survey_id,date,values){
   var request = axios.post(URL,values);
   return {
     type: ADD_INGESTA,
+    payload:request
+  }
+}
+
+
+
+export function fetchComponents(){
+
+  const URL = getAPIUrl(`components`);
+  var request = axios.get(URL);
+  return {
+    type: FETCH_COMPONENTS,
     payload:request
   }
 }

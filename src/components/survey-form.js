@@ -14,23 +14,23 @@ momentLocalizer();
 class SurveyForm extends Component {
   constructor(props){
     super(props);
-  //  debugger;
+  //
     this.state = {
       subject_number:this.props.match.params.subject_number,
     };
 
-  //  debugger;
+  //
   }
 
   componentDidMount(){
-   debugger;
+
     let creating = false;
     if(typeof this.props.match.params.survey_id!="undefined"){
       this.props.fetchSurvey(this.props.match.params.subject_number,this.props.match.params.survey_id);
     }
   }
   componentWillReceiveProps(newProps){
-    debugger;
+
     console.log(this.props.match.params);
     if(this.props.match.params.survey_id != newProps.match.params.survey_id){
       this.props.fetchSurvey(newProps.match.subject_number,newProps.match.survey_id);
@@ -63,7 +63,7 @@ class SurveyForm extends Component {
   }
   renderDatePicker(field){
     const {input, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
-    debugger;
+
     return (<div>
           <DatePicker {...input} {...rest} dateFormat="DD/MM/YYYY" selected={defaultValue} />
           {touched && error && <span>{error}</span>}
@@ -72,14 +72,14 @@ class SurveyForm extends Component {
 
   handleChange(date) {
     console.log(date);
-    debugger;
+
     this.setState({dateToAdd:date});
     this.props.addSurveyDay(date.format('YYYY-MM-DD'));
 
   }
 
   newDiary(date){
-    
+
     this.props.addSurveyDay(date,this.props.survey._id);
     console.log(date);
   }

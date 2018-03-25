@@ -15,7 +15,7 @@ class SurveyList extends Component {
   }
 
   renderList(){
-    debugger;
+  
     return this.props.surveys.map(survey=>{
       return <SurveyCell key={survey._id} survey={survey}/>
     });

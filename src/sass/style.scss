@@ -181,3 +181,11 @@ section {
 .autocomplete li:last-child{
 	border-bottom: 1px solid black;
 }
+
+li.breakdown{
+	background-color:green;
+	font-weight:bolder;
+}
+li.food{
+	background-color:$light-green;
+}

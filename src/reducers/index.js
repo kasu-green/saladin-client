@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import SubjectsReducer from './reducer_subjects';
 import SubjectReducer from './reducer_subject';
 import SurveyListReducer from './reducer_surveylist';
 import SurveyReducer from './reducer_survey';
@@ -8,7 +9,8 @@ import LocaleReducer from './reducer-locale';
 import DiaryReducer from './reducer_diary';
 import ComponentsReducer from './reducer_components';
 const rootReducer = combineReducers({
-  subjects: SubjectReducer, // current list of subjects
+  subjects: SubjectsReducer, // current list of subjects
+  subject: SubjectReducer,
   surveys: SurveyListReducer, // current list of surveys
   survey: SurveyReducer, // current survey
   diary: DiaryReducer, // current diary

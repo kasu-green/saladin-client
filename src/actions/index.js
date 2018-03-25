@@ -12,6 +12,7 @@ export const FOOD_SEARCH = 'FOOD_SEARCH';
 export const CHANGE_LOCALE = 'CHANGE_LOCALE';
 export const FETCH_DIARY = 'FETCH_DIARY';
 export const ADD_INGESTA = 'ADD_INGESTA';
+export const SELECT_SUBJECT = 'SELECT_SUBJECT';
 
 export const ROOT_URL= 'http://localhost:3000/';
 export const API_KEY = '?key=abcdef';
@@ -27,6 +28,12 @@ export function changeLocale(newLocale){
   }
 }
 
+export function selectSubject(subject){
+  return {
+    type:SELECT_SUBJECT,
+    payload:subject
+  }
+}
 
 export function searchSubjects(term){
   return {
@@ -63,8 +70,8 @@ export function fetchSubjects(){
   }
 }
 
-export function fetchSurveys(subject_number){
-  const URL = `${ROOT_URL}surveys/${subject_number}${API_KEY}`;
+export function fetchSurveys(subject_id){
+  const URL = `${ROOT_URL}surveys/${subject_id}${API_KEY}`;
   var request = axios.get(URL);
   return {
     type:FETCH_SURVEYS,
@@ -72,8 +79,8 @@ export function fetchSurveys(subject_number){
   }
 }
 
-export function fetchSurvey(subject_number,survey_id){
-  const URL = `${ROOT_URL}surveys/${subject_number}/${survey_id}${API_KEY}`;
+export function fetchSurvey(subject_id,survey_id){
+  const URL = `${ROOT_URL}surveys/${subject_id}/${survey_id}${API_KEY}`;
   var request = axios.get(URL);
   return {
     type:FETCH_SURVEY,
@@ -81,9 +88,9 @@ export function fetchSurvey(subject_number,survey_id){
   }
 }
 
-export function addSurvey(subject_number,values){
+export function addSurvey(subject_id,values){
   console.log('submitting survey',values);
-  const URL = `${ROOT_URL}surveys/${subject_number}${API_KEY}`;
+  const URL = `${ROOT_URL}surveys/${subject_id}${API_KEY}`;
   var request = axios.post(URL,values);
   return {
     type:ADD_SURVEY,

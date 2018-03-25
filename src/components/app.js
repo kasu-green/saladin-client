@@ -13,13 +13,13 @@ export default class App extends Component {
       <BrowserRouter history={browserHistory}>
         <div>
           <Switch>
-            <Route path="/survey/:subject_number/edit/:survey_id" component={SurveyForm}/>
+            <Route path="/survey/:subject_id/edit/:survey_id" component={SurveyForm}/>
             <Route path="/diary/:survey_id/:diary_date" component={Diary}/>
             <Route path="/subjects/add" component={SubjectForm}/>
             <Route path="/subjects" component={SubjectList}/>
 
-            <Route path="/survey/:subject_number/add" component={SurveyForm}/>
-            <Route path="/survey/:subject_number" component={SurveyList}/>
+            <Route path="/survey/:subject_id/add" component={SurveyForm}/>
+            <Route path="/survey/:subject_id" component={SurveyList}/>
             <Route path="/" component={Login}/>
           </Switch>
         </div>

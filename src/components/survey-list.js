@@ -11,11 +11,11 @@ class SurveyList extends Component {
 
   componentDidMount(){
 
-    this.props.fetchSurveys(this.props.match.params.subject_number);
+    this.props.fetchSurveys(this.props.subject._id);
   }
 
   renderList(){
-  
+
     return this.props.surveys.map(survey=>{
       return <SurveyCell key={survey._id} survey={survey}/>
     });
@@ -46,9 +46,10 @@ class SurveyList extends Component {
   }
 }
 
-function mapStateToProps({surveys}){
+function mapStateToProps({surveys,subject}){
   const {filter, data} = surveys;
   return {
+    subject:subject,
     surveys: data.filter( (item) => {
           return true;
       } )};

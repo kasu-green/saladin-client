@@ -15,7 +15,7 @@ class SubjectList extends Component{
 
   renderSubjects(){
     return this.props.subjects.map(subject=>{
-      return <SubjectCell key={subject._id} subject={subject}/>
+      return (<SubjectCell history={this.props.history} key={subject._id} subject={subject}/>)
     });
   }
   render(){

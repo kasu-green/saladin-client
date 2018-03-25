@@ -8,7 +8,7 @@ class SubjectCell extends Component{
 
   selectSubject(){
     this.props.selectSubject(this.props.subject);
-    this.props.history.push('/survey/');
+    this.props.history.push('/survey/'+this.props.subject._id);
   }
 
   render(){

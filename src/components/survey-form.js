@@ -16,7 +16,7 @@ class SurveyForm extends Component {
     super(props);
   //
     this.state = {
-      subject_number:this.props.match.params.subject_number,
+      subject_id:this.props.match.params.subject_id,
     };
 
   //
@@ -25,29 +25,30 @@ class SurveyForm extends Component {
   componentDidMount(){
 
     let creating = false;
-    if(typeof this.props.match.params.survey_id!="undefined"){
-      this.props.fetchSurvey(this.props.match.params.subject_number,this.props.match.params.survey_id);
-    }
+    debugger;
+    //if(typeof this.props.match.params.survey_id!="undefined"){
+      this.props.fetchSurvey(this.props.match.params.subject_id,this.props.match.params.survey_id);
+    //}
   }
   componentWillReceiveProps(newProps){
 
     console.log(this.props.match.params);
     if(this.props.match.params.survey_id != newProps.match.params.survey_id){
-      this.props.fetchSurvey(newProps.match.subject_number,newProps.match.survey_id);
+      this.props.fetchSurvey(newProps.match.subject_id,newProps.match.survey_id);
     }
 
-    if(this.state.subject_number != newProps.match.params.subject_number){
-      this.setState({subject_number:newProps.match.params.subject_number});
+    if(this.state.subject_id != newProps.match.params.subject_id){
+      this.setState({subject_id:newProps.match.params.subject_id});
     }
     //this.setState({creating:false,survey_id:this.props.match.params.survey_id});
   }
 
   submitForm(values){
-    const {subject_number} = this.props.match.params.subject_number;
+    const {subject_id} = this.props.match.params.subject_id;
     //e.preventDefault();
     console.log(values);
-    this.props.addSurvey(this.state.subject_number,values).then((survey)=>{
-      this.props.history.push('/survey/'+this.state.subject_number+'/edit/'+survey.payload.data._id);
+    this.props.addSurvey(this.state.subject_id,values).then((survey)=>{
+      this.props.history.push('/survey/'+this.state.subject_id+'/edit/'+survey.payload.data._id);
 
     });
   }
@@ -112,7 +113,7 @@ class SurveyForm extends Component {
       const {handleSubmit} = this.props;
       return (
         <div>{this.props.initialValues.date}
-          <h3>Nouvelle enquête: Sujet: {this.state.subject_number}</h3>
+          <h3>Nouvelle enquête: Sujet: {this.state.subject_id}</h3>
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
             <div className="row">
                 <Field name="date" placeholder="Commentaire" label="Date de Consultation"   type="text" component="input"></Field>
@@ -133,7 +134,7 @@ class SurveyForm extends Component {
     }
 }
 /*      <button className="btn">Create</button>
-      <Link to={"/survey/"+this.state.subject_number} className="btn ">Cancel</Link>*/
+      <Link to={"/survey/"+this.state.subject_id} className="btn ">Cancel</Link>*/
 
 function validate(values ){
   const errors = {};

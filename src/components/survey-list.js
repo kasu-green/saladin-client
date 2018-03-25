@@ -10,14 +10,14 @@ import SurveyCell from './survey-cell';
 class SurveyList extends Component {
 
   componentDidMount(){
-
-    this.props.fetchSurveys(this.props.subject._id);
+    debugger;
+    this.props.fetchSurveys(this.props.match.params.subject_id);
   }
 
   renderList(){
 
     return this.props.surveys.map(survey=>{
-      return <SurveyCell key={survey._id} survey={survey}/>
+      return <SurveyCell key={survey._id} subject_id={this.props.match.params.subject_id} survey={survey}/>
     });
   }
 
@@ -35,7 +35,7 @@ class SurveyList extends Component {
           </ul>
 
           <div className="fixed-action-btn">
-            <Link to={"/survey/"+this.props.match.params.subject_number+"/add"} id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
+            <Link to={"/survey/"+this.props.match.params.subject_id+"/add"} id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
               <i className="material-icons">add</i>
             </Link>
           </div>
@@ -49,7 +49,6 @@ class SurveyList extends Component {
 function mapStateToProps({surveys,subject}){
   const {filter, data} = surveys;
   return {
-    subject:subject,
     surveys: data.filter( (item) => {
           return true;
       } )};

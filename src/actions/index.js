@@ -71,6 +71,7 @@ export function fetchSubjects(){
 }
 
 export function fetchSurveys(subject_id){
+  debugger;
   const URL = `${ROOT_URL}surveys/${subject_id}${API_KEY}`;
   var request = axios.get(URL);
   return {

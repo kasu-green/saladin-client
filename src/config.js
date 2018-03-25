@@ -44,6 +44,14 @@ export const availableBreakdown = {
           language:"french"
         }
       ]
+    },
+    "night":{
+      translation:[
+        {
+          name:"Soir / Nuit",
+          language:"french"
+        }
+      ]
     }
 
 }
@@ -56,5 +64,5 @@ export const _translate = (locale,translation_array,key)=>{
       return translation[key];
     }
   }
-  return "not translated";
+  return translation[0][key];
 }

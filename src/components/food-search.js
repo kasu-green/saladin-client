@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {searchFood} from '../actions';
 import cx from "classnames";
+
 class FoodSearch extends Component {
 
   constructor(props){
@@ -24,6 +25,14 @@ class FoodSearch extends Component {
 
   selectElement(food){
     this.setState({selectedElementId:food._id,term:this.translatedName(food),displayAutoComplete:false});
+
+    //redux form plug
+
+    if(this.props.input){
+      const { input: { value, onChange } } = this.props;
+
+      onChange(food._id);
+    }
   }
 
   renderAutoComplete(){
@@ -42,9 +51,12 @@ class FoodSearch extends Component {
   }
 
    render() {
+     const {meta:{touched,invalid,pristine}} = this.props;
      return (
        <div className="search-bar">
         <input
+
+
           onClick = {(e)=>{ e.currentTarget.select()}}
           value = {this.state.term}
           onChange={(e)=>this.onInputChange(e.target.value)} />
@@ -54,6 +66,8 @@ class FoodSearch extends Component {
    }
 
    onInputChange(term){
+
+
      this.setState({term,displayAutoComplete:true});
      this.props.searchFood(term);
    }

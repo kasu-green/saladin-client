@@ -6,15 +6,15 @@ import FoodSearch from './food-search';
 import {availableBreakdown,_translate} from '../config';
 import _ from 'lodash';
 class DiaryForm extends Component {
-  constructor(props){
-    super(props);
+    constructor(props){
+      super(props);
 
-  }
+    }
 
 
-  submitForm(values){
-
-  }
+    submitForm(values){
+      this.props.onSubmit(values);
+    }
 
 
     renderOptions(){
@@ -24,6 +24,7 @@ class DiaryForm extends Component {
           )
       });
     }
+
     render(){
 
       const {handleSubmit} = this.props;
@@ -32,11 +33,11 @@ class DiaryForm extends Component {
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
           <div className="row">
 
-              <Field name="pickedFood" component={FoodSearch}> </Field> 
+              <Field name="food_id" component={FoodSearch}> </Field>
             </div>
 
             <div className="row">
-                <Field name="quantity" placeholder="Quantity" label="Date de Consultation"  type="text" component="input"></Field>
+                <Field name="qty" placeholder="Quantité (grammes / ml)"  type="text" component="input"></Field>
             </div>
             <div className="row">
               <Field name="breakdown" component="select">
@@ -57,13 +58,18 @@ class DiaryForm extends Component {
 
 function validate(values ){
   const errors = {};
-  console.log(values);
+  if(!values.food_id){
+    errors.food_id = "Select a food";
+  }
   return errors;
 }
 
 DiaryForm = reduxForm({
   validate,
-  form:'ingesta'
+  form:'ingesta',
+  initialValues:{
+    breakdown:"breakfast"
+  }
 })(DiaryForm);
 
 DiaryForm =   connect((state)=>{

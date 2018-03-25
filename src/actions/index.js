@@ -11,11 +11,14 @@ export const ADD_SURVEY_DAY = 'ADD_SURVEY_DAY';
 export const FOOD_SEARCH = 'FOOD_SEARCH';
 export const CHANGE_LOCALE = 'CHANGE_LOCALE';
 export const FETCH_DIARY = 'FETCH_DIARY';
+export const ADD_INGESTA = 'ADD_INGESTA';
 
+export const ROOT_URL= 'http://localhost:3000/';
+export const API_KEY = '?key=abcdef';
 
-const ROOT_URL= 'http://localhost:3000/';
-const API_KEY = '?key=abcdef';
-
+export const getAPIUrl=(urlpart)=>{
+  return `${ROOT_URL}${urlpart}${API_KEY}`;
+}
 export function changeLocale(newLocale){
   return {
     type:CHANGE_LOCALE,
@@ -116,10 +119,21 @@ export function fetchDiary(date,survey_id){
 
 export function searchFood(term){
   //localhost:3000/food/search/Poulet
-  const URL = `${ROOT_URL}food/search/${term}${API_KEY}`;
+  const URL = `${ROOT_URL}food/search${API_KEY}&term=${term}`;
   var request = axios.get(URL);
   return {
     type: FOOD_SEARCH,
     payload:request
   };
+}
+
+export function addIngesta(survey_id,date,values){
+  date = Moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+  date+='Z';
+  const URL = getAPIUrl(`diary/${survey_id}/${date}/ingesta`);
+  var request = axios.post(URL,values);
+  return {
+    type: ADD_INGESTA,
+    payload:request
+  }
 }

@@ -33,7 +33,7 @@ class DiaryForm extends Component {
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
           <div className="row">
 
-              <Field name="food_id" component={FoodSearch}> </Field>
+              <Field name="food" component={FoodSearch}> </Field>
             </div>
 
             <div className="row">
@@ -58,8 +58,8 @@ class DiaryForm extends Component {
 
 function validate(values ){
   const errors = {};
-  if(!values.food_id){
-    errors.food_id = "Select a food";
+  if(!values.food){
+    errors.food = "Select a food";
   }
   return errors;
 }

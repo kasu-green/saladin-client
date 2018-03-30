@@ -14,16 +14,18 @@ class Diary extends Component {
   componentDidMount(){
 
     this.props.fetchComponents();
+    const {subject_id,survey_id,diary_date} = this.props.match.params;
     if(typeof this.props.match.params.survey_id!="undefined"){
-      this.props.fetchDiary(this.props.match.params.diary_date,this.props.match.params.survey_id);
+      this.props.fetchDiary(subject_id,survey_id,diary_date);
     }
   }
   onSubmit(values){
     console.log('should add ingesta');
     console.log(values);
     // alter the current diary state and submit it
+      const {subject_id,survey_id,diary_date} = this.props.match.params;
     const {food_id,quantity,breakdown} = values;
-    this.props.addIngesta(this.props.match.params.survey_id,this.props.match.params.diary_date,values);
+    this.props.addIngesta(subject_id,survey_id,diary_date,values);
   //  this.props.diary.
   }
 
@@ -48,7 +50,7 @@ class Diary extends Component {
 
   renderIngesta(ingesta){
     return ingesta.map((item)=>{
-        
+
       return (
         <li className="food" key={item._id}>
           <div className="food_name">{_translate(this.props.locale.language,item.food_id.translation,'name')}</div>

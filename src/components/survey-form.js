@@ -70,7 +70,7 @@ class SurveyForm extends Component {
           {touched && error && <span>{error}</span>}
     </div>);
   };
-
+/*
   handleChange(date) {
     console.log(date);
 
@@ -78,7 +78,7 @@ class SurveyForm extends Component {
     this.props.addSurveyDay(date.format('YYYY-MM-DD'));
 
   }
-
+*/
   newDiary(date){
 
     this.props.addSurveyDay(date,this.props.match.params.subject_id,this.props.survey._id);
@@ -88,7 +88,7 @@ class SurveyForm extends Component {
 
     return this.props.survey.diaries.map((item)=>{
       let date = Moment(item.date).format('DD-MM-YYYY');
-      return (<li key={item.date}><Link to={"/diary/"+this.props.match.params.survey_id+"/"+date}>{date}</Link> {item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée"}</li>)
+      return (<li key={item.date}><Link to={"/diary/"+this.props.match.params.subject_id+"/"+this.props.match.params.survey_id+"/"+date}>{date}</Link> {item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée"}</li>)
     });
   }
   renderDiary(){

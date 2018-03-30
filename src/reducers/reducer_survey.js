@@ -47,7 +47,7 @@ export default function (state=initialState,action){
       }*/
       diaries.push(action.payload.data);
       diaries  = _.orderBy(diaries, function(e){
-        let ts = moment(e.date,'DD-MM-YYYY').unix();
+        let ts = moment(e.date,'YYYY-MM-DD').unix();
         return ts ;
       },['asc']);
 

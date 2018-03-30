@@ -100,11 +100,11 @@ export function addSurvey(subject_id,values){
 
 }
 
-export function addSurveyDay(date,survey_id){
+export function addSurveyDay(date,subject_id,survey_id){
   //localhost:3000/diary/5ab678f57906b24357185263/?key=abcdef
   date = Moment(date).format('YYYY-MM-DD');
   date+='Z';
-  const URL = `${ROOT_URL}diary/${survey_id}${API_KEY}`;
+  const URL = `${ROOT_URL}diary/${subject_id}/${survey_id}${API_KEY}`;
   var request = axios.post(URL,{date});
   return {
     type: ADD_SURVEY_DAY,

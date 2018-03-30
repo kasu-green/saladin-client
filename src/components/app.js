@@ -5,8 +5,8 @@ import SubjectList from './subject-list';
 import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
 import SurveyForm from './survey-form';
-
 import Diary from './diary';
+
 export default class App extends Component {
   render() {
     return (

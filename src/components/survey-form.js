@@ -81,7 +81,7 @@ class SurveyForm extends Component {
 
   newDiary(date){
 
-    this.props.addSurveyDay(date,this.props.survey._id);
+    this.props.addSurveyDay(date,this.props.match.params.subject_id,this.props.survey._id);
     console.log(date);
   }
   renderDiariesList(){
@@ -150,7 +150,8 @@ SurveyForm = reduxForm({
 SurveyForm =   connect(
     state => ({
     initialValues: state.survey, // pull initial values from account reducer
-    survey : state.survey
+    survey : state.survey,
+    subject:state.subject
   }),{addSurvey,addSurveyDay,fetchSurvey}
   )(SurveyForm);
 

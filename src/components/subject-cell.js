@@ -12,17 +12,17 @@ class SubjectCell extends Component{
   }
 
   render(){
-
     return (<li className="collection-item" key={this.props.key}>
               <div>
-                {this.props.subject.number}
+                {this.props.subject._id}
+
                 {this.props.subject.custom_field}
                 {this.props.subject.last_survey}
 
-                  <i className="material-icons">delete</i>
-                    <a onClick={(e)=>{e.preventDefault(); this.selectSubject()}} className="secondary-content">
-                      <i className="material-icons">navigate_next</i>
-                    </a>
+                
+                  <a onClick={(e)=>{e.preventDefault(); this.selectSubject()}} className="secondary-content">
+                    <i className="material-icons">navigate_next</i>
+                  </a>
               </div>
             </li>)
 

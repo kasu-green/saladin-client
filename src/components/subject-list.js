@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import SubjectCell from './subject-cell';
 import SearchBar from './search-bar';
 import Header from './header';
+
 class SubjectList extends Component{
   componentDidMount(){
     console.log('mount');
@@ -21,8 +22,8 @@ class SubjectList extends Component{
   render(){
     return (
       <div>
-      <Header title="Sujets"/>
 
+      <Header title="prout"/>
       <section className="flex flex-column align-center just-center">
         <SearchBar/>
 
@@ -49,10 +50,11 @@ function mapStateToProps({subjects}){
   const {filter, data} = subjects;
   return {
     subjects: data.filter( (item) => {
+        debugger;
         if(!item.custom_field){
           item.custom_field = "";
         }
-        const number = item.number.toLowerCase();
+        const number = (''+item._id).toLowerCase();
         const custom_field = item.custom_field.toLowerCase();
 
         return (number.startsWith(filter) || (custom_field.includes(filter)))

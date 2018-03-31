@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {fetchDiary,addIngesta,fetchComponents} from '../actions';
 import {availableBreakdown,_translate} from '../config';
 import DiaryForm from './diary-form';
+import Header from './header';
 class Diary extends Component {
   constructor(props){
     super(props);
@@ -36,16 +37,28 @@ class Diary extends Component {
 
       let componentTranslation = 'not found';
       let componentUnitTranslation ="N/A";
-      if(this.props.components[item.component_id]){
-        componentTranslation = _translate(this.props.locale.language,this.props.components[item.component_id].translation,'name');
-        componentUnitTranslation = _translate(this.props.locale.language,this.props.components[item.component_id].translation,'unit');
+      if(this.props.components[item.component]){
+        componentTranslation = _translate(this.props.locale.language,this.props.components[item.component].translation,'name');
+        componentUnitTranslation = _translate(this.props.locale.language,this.props.components[item.component].translation,'unit');
       }
-      return (<div key={item.component_id}>
-        {componentTranslation} {item.qty} {componentUnitTranslation}
-        </div>);
+      return (<span key={item.component}>
+        {componentTranslation} {item.qty} {componentUnitTranslation},&nbsp;
+        </span>);
     });
 
 
+  }
+
+  renderComponent(component){
+    let componentTranslation = 'not found';
+    let componentUnitTranslation ="N/A";
+    if(this.props.components[component.component]){
+      componentTranslation = _translate(this.props.locale.language,this.props.components[component.component].translation,'name');
+      componentUnitTranslation = _translate(this.props.locale.language,this.props.components[component.component].translation,'unit');
+    }
+    return (<span key={component.component}>
+      {componentTranslation} {component.qty} {componentUnitTranslation}
+      </span>);
   }
 
   renderIngesta(ingesta){
@@ -53,8 +66,8 @@ class Diary extends Component {
 
       return (
         <li className="food" key={item._id}>
-          <div className="food_name">{_translate(this.props.locale.language,item.food_id.translation,'name')}</div>
-          <div className="food_quantity">{item.qty} g/ml</div>
+          <span className="food_name">{_translate(this.props.locale.language,item.food.translation,'name')}</span>
+          &nbsp;<span className="food_quantity">{item.qty} g</span>
           <div className="food_stats">{this.renderFoodStat(item.components)}</div>
         </li>)
     });
@@ -65,18 +78,33 @@ class Diary extends Component {
       return (
         <ul key={breakdown._id}>
 
-          <li  className="breakdown">{_translate(this.props.locale.language,availableBreakdown[key].translation,'name')}</li>
+          <li  className="breakdown">{_translate(this.props.locale.language,availableBreakdown[key].translation,'name')}
+            <span className="food_stats">{this.renderFoodStat(breakdown.summary)}</span></li>
           {this.renderIngesta(breakdown.ingesta)}
         </ul>
       )
     });
   }
+
+  renderSummary(){
+    return _.map(this.props.diary.summary,(summary)=>{
+      debugger;
+      return (<li>{this.renderComponent(summary)}</li>)
+    });
+  }
   render(){
     return (
       <div>
-        <h3>Carnet du </h3>
+        <Header title="Carnet Alimentaire"></Header>
+        <div className="header-wrapper">
         <DiaryForm onSubmit={this.onSubmit.bind(this)}/>
         {this.renderDiary(this.props.diary.diary)}
+
+        <h3>Résumé du carnet</h3> <br/>
+        <ul class="summary">
+          {this.renderSummary()}
+        </ul>
+        </div>
       </div>
     );
   }

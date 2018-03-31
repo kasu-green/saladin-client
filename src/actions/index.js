@@ -4,6 +4,7 @@ export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
 export const ADD_SUBJECT = 'ADD_SUBJECT';
 export const ADD_SURVEY = 'ADD_SURVEY';
+export const UPDATE_SURVEY = 'UPDATE_SURVEY';
 export const FETCH_SURVEY = 'FETCH_SURVEY';
 export const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
 export const FETCH_SURVEYS = 'FETCH_SURVEYS';
@@ -13,14 +14,23 @@ export const CHANGE_LOCALE = 'CHANGE_LOCALE';
 export const FETCH_DIARY = 'FETCH_DIARY';
 export const ADD_INGESTA = 'ADD_INGESTA';
 export const SELECT_SUBJECT = 'SELECT_SUBJECT';
+export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
+
 
 export const ROOT_URL= 'http://localhost:3000/';
 export const API_KEY = '?key=abcdef';
-export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
-
 export const getAPIUrl=(urlpart)=>{
   return `${ROOT_URL}${urlpart}${API_KEY}`;
 }
+
+export const EMPTY_SURVEY =  {
+    _id:-1,
+    _date: new Date(),
+    subject_id: -1,
+    comment:'',
+    diaries:[]
+};
+
 export function changeLocale(newLocale){
   return {
     type:CHANGE_LOCALE,
@@ -91,13 +101,36 @@ export function fetchSurvey(subject_id,survey_id){
 
 export function addSurvey(subject_id,values){
   console.log('submitting survey',values);
+  let {_date} = values;
+  values.date = Moment(_date).format('YYYY-MM-DD');
+  values.date+='Z';
+
   const URL = `${ROOT_URL}surveys/${subject_id}${API_KEY}`;
   var request = axios.post(URL,values);
   return {
     type:ADD_SURVEY,
     payload:request
   }
+}
 
+export function updateSurvey(subject_id,survey_id,values){
+  console.log('updating survey',values);
+  let {_date} = values;
+  values.date = Moment(_date).format('YYYY-MM-DD');
+  values.date+='Z';
+  const URL = `${ROOT_URL}surveys/${subject_id}/${survey_id}${API_KEY}`;
+  var request = axios.post(URL,values);
+  return {
+    type:UPDATE_SURVEY,
+    payload:request
+  }
+}
+
+export function newSurvey (){
+  return {
+    type:ADD_SURVEY,
+    payload:{data:EMPTY_SURVEY}
+  }
 }
 
 export function addSurveyDay(date,subject_id,survey_id){
@@ -113,7 +146,7 @@ export function addSurveyDay(date,subject_id,survey_id){
 }
 
 export function fetchDiary(subject_id,survey_id,date){
-  date = Moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+  date = Moment(date).format('YYYY-MM-DD');
   debugger;
   date+='Z';
   //localhost:3000/diary/5ab678f57906b24357185263/?date=2018-02-02Z&key=abcdef
@@ -137,7 +170,7 @@ export function searchFood(term){
 }
 
 export function addIngesta(subject_id,survey_id,date,values){
-  date = Moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+  date = Moment(date).format('YYYY-MM-DD');
   date+='Z';
   const URL = getAPIUrl(`diary/${subject_id}/${survey_id}/${date}/ingesta`);
   var request = axios.post(URL,values);

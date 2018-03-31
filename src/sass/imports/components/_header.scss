@@ -1,3 +1,6 @@
+
+$header_height:50px;
+
 header {
   height: auto;
   background-color: $light-green;
@@ -9,7 +12,7 @@ header {
     width: 100%;
     color: black;
     max-width: 1024px;
-    height: 50px;
+    height: $header_height;
     margin: 0px auto;
     padding: 5px 0px;
     background-color: $light-green;
@@ -34,3 +37,7 @@ header {
   }
 
 } /* Fin Header */
+
+.header-wrapper{
+  padding-top:$header_height;
+}

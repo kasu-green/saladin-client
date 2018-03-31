@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch,browserHistory} from 'react-router-dom';
 import SubjectList from './subject-list';
 import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
-import SurveyForm from './survey-form';
+import Survey from './survey';
 import Diary from './diary';
 
 export default class App extends Component {
@@ -13,17 +13,21 @@ export default class App extends Component {
       <BrowserRouter history={browserHistory}>
         <div>
           <Switch>
-            <Route path="/survey/:subject_id/edit/:survey_id" component={SurveyForm}/>
-            <Route path="/diary/:subject_id/:survey_id/:diary_date" component={Diary}/>
-            <Route path="/subjects/add" component={SubjectForm}/>
-            <Route path="/subjects" component={SubjectList}/>
-
-            <Route path="/survey/:subject_id/add" component={SurveyForm}/>
-            <Route path="/survey/:subject_id" component={SurveyList}/>
+              <Route path="/survey/:subject_id/:action/:survey_id" component={Survey}/>
+              <Route path="/survey/:subject_id/:action" component={Survey}/>
+              <Route path="/survey/:subject_id" component={SurveyList}/>
 
 
 
-            <Route path="/" component={Login}/>
+              <Route path="/diary/:subject_id/:survey_id/:diary_date" component={Diary}/>
+              <Route path="/subjects/add" component={SubjectForm}/>
+              <Route path="/subjects" component={SubjectList}/>
+
+
+
+
+
+              <Route path="/" component={Login}/>
 
 
 

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export const availableLocales= {
     "french":{
       language:"french",
@@ -58,6 +59,9 @@ export const availableBreakdown = {
 
 
 export const _translate = (locale,translation_array,key)=>{
+  if(_.isEmpty(translation_array)){
+    return 'n/a';
+  }
   for(var translation of translation_array){
 
     if(locale == translation.language){

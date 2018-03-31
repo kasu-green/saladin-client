@@ -1,0 +1,23 @@
+
+$picked_color: #006edc;
+.survey-form{
+
+  input{
+    width:100%;
+    height:36px;
+  }
+}
+.survey .react-calendar{
+  width:100%;
+}
+
+.survey{
+  button.react-calendar__tile:disabled{
+    background-color: $picked_color;
+    color:white;
+  }
+}
+
+.summary li:nth-child(odd) {
+  background: #CACACA
+}

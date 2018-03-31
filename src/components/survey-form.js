@@ -1,56 +1,32 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import {addSurvey,addSurveyDay,fetchSurvey} from '../actions';
-import 'react-widgets/dist/css/react-widgets.css';
-
+import { DateTimePicker } from 'react-widgets'
 import Moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
-import { Calendar } from 'react-widgets';
-
+import 'react-widgets/dist/css/react-widgets.css';
 Moment.locale('fr');
 momentLocalizer();
 class SurveyForm extends Component {
   constructor(props){
     super(props);
-  //
-    this.state = {
-      subject_id:this.props.match.params.subject_id,
-    };
 
-  //
+
   }
 
-  componentDidMount(){
 
-    let creating = false;
-    debugger;
-    //if(typeof this.props.match.params.survey_id!="undefined"){
-      this.props.fetchSurvey(this.props.match.params.subject_id,this.props.match.params.survey_id);
-    //}
-  }
-  componentWillReceiveProps(newProps){
-
-    console.log(this.props.match.params);
-    if(this.props.match.params.survey_id != newProps.match.params.survey_id){
-      this.props.fetchSurvey(newProps.match.subject_id,newProps.match.survey_id);
-    }
-
-    if(this.state.subject_id != newProps.match.params.subject_id){
-      this.setState({subject_id:newProps.match.params.subject_id});
-    }
-    //this.setState({creating:false,survey_id:this.props.match.params.survey_id});
-  }
 
   submitForm(values){
-    const {subject_id} = this.props.match.params.subject_id;
+  /*  const {subject_id} = this.props.match.params;
     //e.preventDefault();
+    debugger;
     console.log(values);
-    this.props.addSurvey(this.state.subject_id,values).then((survey)=>{
-      this.props.history.push('/survey/'+this.state.subject_id+'/edit/'+survey.payload.data._id);
+    this.props.addSurvey(subject_id,values).then((survey)=>{
+      this.props.history.push('/survey/'+subject_id+'/edit/'+survey.payload.data._id);
 
-    });
+    });*/
+
+    this.props.onSubmitForm(values);
   }
 
   renderField(field){
@@ -63,75 +39,34 @@ class SurveyForm extends Component {
     );
   }
   renderDatePicker(field){
-    const {input, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
-
+    const {input:{value,onChange}, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
+    debugger;
     return (<div>
-          <DatePicker {...input} {...rest} dateFormat="DD/MM/YYYY" selected={defaultValue} />
+          <DateTimePicker onChange={onChange}  time={false} {...field.input} {...rest} onBlur={()=>{}}selected={defaultValue} />
           {touched && error && <span>{error}</span>}
     </div>);
   };
-/*
-  handleChange(date) {
-    console.log(date);
 
-    this.setState({dateToAdd:date});
-    this.props.addSurveyDay(date.format('YYYY-MM-DD'));
 
-  }
-*/
-  newDiary(date){
+  render(){
 
-    this.props.addSurveyDay(date,this.props.match.params.subject_id,this.props.survey._id);
-    console.log(date);
-  }
-  renderDiariesList(){
-
-    return this.props.survey.diaries.map((item)=>{
-      let date = Moment(item.date).format('DD-MM-YYYY');
-      return (<li key={item.date}><Link to={"/diary/"+this.props.match.params.subject_id+"/"+this.props.match.params.survey_id+"/"+date}>{date}</Link> {item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée"}</li>)
-    });
-  }
-  renderDiary(){
-    if(this.props.survey._id=="-1"){
-      return (<div></div>);
-    }
+    const {handleSubmit} = this.props;
     return (
-      <div>
-        <div className="row">
-        <Calendar
-          onChange={(value)=>{this.newDiary(value)}}
-        />
+      <div className="survey-form">
+
+        <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
+          <div className="row">
+              <Field name="_date" placeholder="Date" label="Date de Consultation"  type="text" component={this.renderDatePicker}></Field>
+          </div>
+          <div className="row">
+            <Field name="comment" className="" placeholder="Commentaire" label=" Commentaire" component="input"></Field>
+          </div>
+          <button className="btn main">Enregistrer</button>
+        </form>
       </div>
 
-      <ul className="collection-list">
-        {this.renderDiariesList()}
-      </ul>
-    </div>);
+    )
   }
-    render(){
-
-      const {handleSubmit} = this.props;
-      return (
-        <div>{this.props.initialValues.date}
-          <h3>Nouvelle enquête: Sujet: {this.state.subject_id}</h3>
-          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
-            <div className="row">
-                <Field name="date" placeholder="Commentaire" label="Date de Consultation"   type="text" component="input"></Field>
-            </div>
-            <div className="row">
-              <Field name="comment" placeholder="Commentaire" label=" Commentaire" component="input"></Field>
-            </div>
-
-
-
-
-            <button className="btn">{this.props.survey._id == -1 ? "Créer": "Enregistrer"}</button>
-            {this.renderDiary()}
-          </form>
-        </div>
-
-      )
-    }
 }
 /*      <button className="btn">Create</button>
       <Link to={"/survey/"+this.state.subject_id} className="btn ">Cancel</Link>*/
@@ -152,7 +87,7 @@ SurveyForm =   connect(
     initialValues: state.survey, // pull initial values from account reducer
     survey : state.survey,
     subject:state.subject
-  }),{addSurvey,addSurveyDay,fetchSurvey}
+  }),null
   )(SurveyForm);
 
 export default SurveyForm;

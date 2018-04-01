@@ -17,7 +17,7 @@ export const SELECT_SUBJECT = 'SELECT_SUBJECT';
 export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
 
 
-export const ROOT_URL= 'http://localhost:3000/';
+export const ROOT_URL= 'http://it.geekagency.ch:3000/';
 export const API_KEY = '?key=abcdef';
 export const getAPIUrl=(urlpart)=>{
   return `${ROOT_URL}${urlpart}${API_KEY}`;

@@ -1,12 +1,27 @@
+var path = require( "path" );
+var webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: [
     './src/index.js'
   ],
   output: {
-    path: __dirname,
-    publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js',
+    publicPath: "",
+    path: path.resolve(__dirname, 'dist')
   },
+  plugins: [
+
+    new HtmlWebpackPlugin({
+
+        template:'index.html'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+       compressor: {
+           warnings: false
+       }
+     }),
+  ],
   module: {
     loaders: [
       {
@@ -22,9 +37,13 @@ module.exports = {
         },
         { test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader?limit=100000' },
       {
-          test: /\.scss$/,
-          loaders: ['style-loader','css-loader','sass-loader']
-        },
+        test: /\.scss$/,
+        loaders: ['style-loader','css-loader','sass-loader']
+      },
+      {
+        loader: "html-loader",
+        test: /\.(html)$/,
+      },
 
     ]
   },

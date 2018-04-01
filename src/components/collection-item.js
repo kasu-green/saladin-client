@@ -11,7 +11,7 @@ export default class CollectionItem extends Component{
     const {text,subtext,icon,onClick} = this.props;
     if(!_.isUndefined(onClick)){
       return (<div className="">
-        <a onClick={onClick} className="secondary-content">
+        <a className="secondary-content">
           <i className="material-icons">{icon}</i>
         </a>
       </div>)
@@ -28,7 +28,7 @@ export default class CollectionItem extends Component{
   render(){
     const {text,subtext,icon,onClick} = this.props;
     return (
-      <div className="collection-item-detail flex align-center just-between">
+      <div onClick={onClick}  className="collection-item-detail flex align-center just-between">
         <div className="flex wrap flex-column">
           <div>{text}</div>
           <div className="small_text">{subtext || ' '}</div>

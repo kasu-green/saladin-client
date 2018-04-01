@@ -23,7 +23,7 @@ class SubjectList extends Component{
     return (
       <div>
 
-      <Header title="prout"/>
+      <Header title="Sujets"/>
       <section className="flex flex-column align-center just-center">
         <SearchBar/>
 

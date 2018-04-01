@@ -75,7 +75,7 @@ h1 {
 }
 
 h2 {
-	font-size: $px36;
+	font-size: $px26;
   line-height: 1.5em;
   font-family: $serif-fonts;
 }
@@ -142,7 +142,7 @@ section {
 	max-width: 1024px;
 	width: 100%;
 	margin: 0px auto;
-	padding: 70px 20px;
+	padding: 70px 0px;
 }
 
 /* 04 - PREFIXER */
@@ -193,4 +193,28 @@ li.breakdown{
 }
 li.food{
 	background-color:$light-green;
+}
+.subject_search_form{
+	width: 100%;
+	padding: 0px 20px;
+}
+.collection{
+	padding-top:20px;
+}
+.collection-item{
+	min-height: 48px;
+	color: #808581;
+	padding: 0px 10px;
+	
+}
+
+
+.collection-item:nth-child(odd) {
+
+  background: #F8F8F8
+}
+
+
+.custom_field{
+	color: #C6C8C3;
 }

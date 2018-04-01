@@ -13,16 +13,18 @@ class SubjectCell extends Component{
 
   render(){
     return (<li className="collection-item" key={this.props.key}>
-              <div>
-                {this.props.subject._id}
+              <div className="flex align-center just-between">
+                <div className="flex wrap flex-column">
+                  <div>{this.props.subject._id}</div>
+                  <div className="custom_field">{this.props.subject.custom_field}</div>
 
-                {this.props.subject.custom_field}
-                {this.props.subject.last_survey}
-
-                
+                  <div>{this.props.subject.last_survey}</div>
+                </div>
+                <div className="">
                   <a onClick={(e)=>{e.preventDefault(); this.selectSubject()}} className="secondary-content">
                     <i className="material-icons">navigate_next</i>
                   </a>
+                </div>
               </div>
             </li>)
 

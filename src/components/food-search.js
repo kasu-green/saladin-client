@@ -7,7 +7,7 @@ class FoodSearch extends Component {
 
   constructor(props){
     super(props);
-    this.state = {term: 'Poulet',selectedElementId:-1, displayAutoComplete:false};
+    this.state = {term: '',selectedElementId:-1, displayAutoComplete:false};
   }
   componentDidMount(){
 

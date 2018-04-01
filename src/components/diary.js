@@ -5,6 +5,7 @@ import {fetchDiary,addIngesta,fetchComponents} from '../actions';
 import {availableBreakdown,_translate} from '../config';
 import DiaryForm from './diary-form';
 import Header from './header';
+import moment from 'moment';
 class Diary extends Component {
   constructor(props){
     super(props);
@@ -78,7 +79,8 @@ class Diary extends Component {
       return (
         <ul key={breakdown._id}>
 
-          <li  className="breakdown">{_translate(this.props.locale.language,availableBreakdown[key].translation,'name')}
+          <li  className="breakdown">
+            <span>{_translate(this.props.locale.language,availableBreakdown[key].translation,'name')}</span>
             <span className="food_stats">{this.renderFoodStat(breakdown.summary)}</span></li>
           {this.renderIngesta(breakdown.ingesta)}
         </ul>
@@ -89,19 +91,21 @@ class Diary extends Component {
   renderSummary(){
     return _.map(this.props.diary.summary,(summary)=>{
       debugger;
-      return (<li>{this.renderComponent(summary)}</li>)
+      return (<li key={summary.component}>{this.renderComponent(summary)}</li>)
     });
   }
   render(){
+    const {subject_id,survey_id,diary_date} = this.props.match.params;
+    let date = moment(diary_date).format(this.props.locale.dateFormat);
     return (
       <div>
-        <Header title="Carnet Alimentaire"></Header>
+        <Header title={"Carnet Alimentaire "+date}></Header>
         <div className="header-wrapper">
         <DiaryForm onSubmit={this.onSubmit.bind(this)}/>
         {this.renderDiary(this.props.diary.diary)}
 
-        <h3>Résumé du carnet</h3> <br/>
-        <ul class="summary">
+        <h3>Résumé du jour</h3> <br/>
+        <ul className="summary">
           {this.renderSummary()}
         </ul>
         </div>

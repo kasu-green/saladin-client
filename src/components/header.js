@@ -15,6 +15,9 @@ export default class Header extends Component{
         <nav className="flex align-center just-between">
           <div className="flex">
             <img src="/img/salad.png" alt="logo Saladin"/>
+
+          </div>
+          <div className="flex">
             <h2 className="self-center">{this.props.title}</h2>
           </div>
           <div className="flex">

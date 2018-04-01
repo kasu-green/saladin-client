@@ -3,18 +3,11 @@
 
 	width:100%;
 }
-.collection-item{
-	min-height: 48px;
-	color: #808581;
-	padding: 0px 10px;
-
-}
 
 .collection-item:nth-child(odd) {
 
   background: #F8F8F8
 }
-
 
 .collection-item:nth-child(even) {
 
@@ -26,4 +19,17 @@
   padding: 0px 10px;
   background-color: #e1f5be;
   min-width: 100%;
+}
+
+.collection-item-detail{
+	min-height: 48px;
+	color: #808581;
+	padding: 0px 10px;
+
+}
+
+
+
+.collection-item-detail .small_text{
+	color: #C6C8C3;
 }

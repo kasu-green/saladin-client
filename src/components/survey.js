@@ -11,7 +11,7 @@ import momentLocalizer from 'react-widgets-moment';
 import Calendar from 'react-calendar';
 import Header from './header';
 import SurveyForm from './survey-form';
-
+import CollectionItem from './collection-item';
 
 Moment.locale('fr');
 momentLocalizer();
@@ -101,11 +101,19 @@ class Survey extends Component {
   }
 
   renderDiariesList(){
-
+    const {subject_id,survey_id} = this.props.match.params;
     return this.props.survey.diaries.map((item)=>{
       let date = Moment(item.date).format('YYYY-MM-DD');
-        let display_date = Moment(item.date).format('DD/MM/YYYY');
-      return (<li key={item.date}><Link to={"/diary/"+this.props.match.params.subject_id+"/"+this.props.match.params.survey_id+"/"+date+"Z"}>{display_date}</Link> {item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée"}</li>)
+      let display_date = Moment(item.date).format('DD/MM/YYYY');
+      let subtext = item.diary.length>0? item.diary.length+" entrée(s)" :"aucune entrée";
+      let icon = item.diary.length>0? "check_circle":"highlight_off";
+      let link = `/diary/${subject_id}/${survey_id}/${date}Z`;
+      return (
+          <li key={item.date} className="collection-item">
+            <CollectionItem text={display_date} subtext={subtext} icon={icon} onClick={()=>{ this.props.history.push(link)}}/>
+
+
+          </li>)
     });
   }
 
@@ -140,7 +148,7 @@ class Survey extends Component {
           />
         </div>
 
-        <ul className="collection-list">
+        <ul className="collection">
           {this.renderDiariesList()}
         </ul>
      </div>

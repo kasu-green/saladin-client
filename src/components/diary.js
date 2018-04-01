@@ -6,6 +6,7 @@ import {availableBreakdown,_translate} from '../config';
 import DiaryForm from './diary-form';
 import Header from './header';
 import moment from 'moment';
+
 class Diary extends Component {
   constructor(props){
     super(props);

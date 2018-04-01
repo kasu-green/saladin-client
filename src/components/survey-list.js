@@ -6,7 +6,7 @@ import {SearchBar} from './search-bar';
 import Header from './header';
 import SurveyCell from './survey-cell';
 import CollectionTitle from './collection-title';
-
+import CollectionItem from './collection-item';
 class SurveyList extends Component {
 
   componentDidMount(){
@@ -23,10 +23,17 @@ class SurveyList extends Component {
   renderList(){
 
     return this.props.surveys.map(survey=>{
-      return <SurveyCell key={survey._id} subject_id={this.props.match.params.subject_id} survey={survey}/>
+      const{subject_id} = this.props.match.params
+      var link = `/survey/${subject_id}/edit/${survey._id}`;
+      return <SurveyCell key={survey._id} subject_id={this.props.match.params.subject_id} survey={survey} onClick={()=>{this.props.history.push(link)}}/>
     });
   }
 
+  renderEmptyList(){
+    if(this.props.surveys.length == 0){
+      return (<CollectionItem text="aucune enquête trouvée"/>)
+    }
+  }
 
   render(){
 
@@ -36,8 +43,8 @@ class SurveyList extends Component {
 
         <section className="with-header-nospace flex flex-column align-center just-center">
 
-          <CollectionTitle title="Enquête Alimentaire"/>
-
+          <CollectionTitle title="Enquêtes Alimentaires"/>
+          {this.renderEmptyList()}
           <ul className="collection">
             {this.renderList()}
           </ul>

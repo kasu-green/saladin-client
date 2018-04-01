@@ -2,22 +2,40 @@ import _ from 'lodash';
 import React,{Component} from 'react';
 
 
-export default class CollectionItem {
+export default class CollectionItem extends Component{
+
+  renderMainContent(){
+
+  }
+  renderAction(){
+    const {text,subtext,icon,onClick} = this.props;
+    if(!_.isUndefined(onClick)){
+      return (<div className="">
+        <a onClick={onClick} className="secondary-content">
+          <i className="material-icons">{icon}</i>
+        </a>
+      </div>)
+    }else{
+      return <div></div>
+    }
+  }
+
+  renderTextCenter(){
+    const {centerText} = this.props;
+    return (<div>{centerText}</div>)
+  }
 
   render(){
     const {text,subtext,icon,onClick} = this.props;
     return (
-      <div className="collection-item flex align-center just-between">
+      <div className="collection-item-detail flex align-center just-between">
         <div className="flex wrap flex-column">
           <div>{text}</div>
-          <div className="custom_field">{subtext || ' '}</div>
+          <div className="small_text">{subtext || ' '}</div>
         </div>
-        <div>text center</div>
-        <div className="">
-          <a onClick={onClick} className="secondary-content">
-            <i className="material-icons">navigate_next</i>
-          </a>
-        </div>
+        {this.renderTextCenter()}
+        {this.renderAction()}
+
       </div>
     )
   }

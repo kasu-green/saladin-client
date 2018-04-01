@@ -147,14 +147,14 @@ class Survey extends Component {
    );
   }
   render(){
-    const {subject_id} = this.props.match.params;
+    const {subject_id,action} = this.props.match.params;
     const {handleSubmit} = this.props;
     return (
       <div>
-        <Header title={"Enquête alimentaire:"+ subject_id}></Header>
+        <Header title={subject_id} backTo={()=>{this.props.history.push("/survey/"+subject_id)}}/>
         <div className="header-wrapper">
-        <SurveyForm onSubmitForm={this.submitForm.bind(this)}/>
-        {this.renderDiary()}
+          <SurveyForm edit={action=='add'} onSubmitForm={this.submitForm.bind(this)}/>
+          {this.renderDiary()}
         </div>
       </div>
 

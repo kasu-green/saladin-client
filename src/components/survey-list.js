@@ -1,17 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchSurveys} from '../actions';
+import {fetchSurveys,newSurvey} from '../actions';
 import {Link} from 'react-router-dom';
 import {SearchBar} from './search-bar';
 import Header from './header';
 import SurveyCell from './survey-cell';
-
+import CollectionTitle from './collection-title';
 
 class SurveyList extends Component {
 
   componentDidMount(){
     debugger;
     this.props.fetchSurveys(this.props.match.params.subject_id);
+  }
+
+  newSurvey(){
+
+    this.props.newSurvey();
+    this.props.history.push("/survey/"+this.props.match.params.subject_id+"/add");
   }
 
   renderList(){
@@ -21,23 +27,25 @@ class SurveyList extends Component {
     });
   }
 
+
   render(){
 
     return (
       <div>
-        <Header title="Enquêtes alimentaire"/>
+        <Header title={this.props.match.params.subject_id} backTo={()=>{this.props.history.push("/subjects")}}/>
 
-        <section className="flex flex-column align-center just-center">
+        <section className="with-header-nospace flex flex-column align-center just-center">
 
+          <CollectionTitle title="Enquête Alimentaire"/>
 
-          <ul  className="collection">
+          <ul className="collection">
             {this.renderList()}
           </ul>
 
           <div className="fixed-action-btn">
-            <Link to={"/survey/"+this.props.match.params.subject_id+"/add"} id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
-              <i className="material-icons">add</i>
-            </Link>
+
+              <i onClick={this.newSurvey.bind(this)} className="material-icons">add</i>
+
           </div>
 
         </section>
@@ -54,4 +62,4 @@ function mapStateToProps({surveys,subject}){
       } )};
 }
 
-export default connect(mapStateToProps,{fetchSurveys})(SurveyList);
+export default connect(mapStateToProps,{fetchSurveys,newSurvey})(SurveyList);

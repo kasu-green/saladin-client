@@ -20,7 +20,7 @@ export default function (state=initialState,action){
     case ADD_SURVEY:
     case FETCH_SURVEY:
     case UPDATE_SURVEY:
-
+      debugger;
       action.payload.data._date = new Date(action.payload.data.date);
 
 

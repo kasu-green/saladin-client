@@ -24,7 +24,7 @@ class SubjectList extends Component{
       <div>
 
       <Header title="Sujets"/>
-      <section className="flex flex-column align-center just-center">
+      <section className="main flex flex-column align-center just-center">
         <SearchBar/>
 
 

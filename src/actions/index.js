@@ -25,7 +25,7 @@ export const getAPIUrl=(urlpart)=>{
 
 export const EMPTY_SURVEY =  {
     _id:-1,
-    _date: new Date(),
+    date: Moment().format('YYYY-MM-DD'),
     subject_id: -1,
     comment:'',
     diaries:[]

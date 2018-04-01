@@ -16,10 +16,9 @@ class SubjectCell extends Component{
               <div className="flex align-center just-between">
                 <div className="flex wrap flex-column">
                   <div>{this.props.subject._id}</div>
-                  <div className="custom_field">{this.props.subject.custom_field}</div>
-
-                  <div>{this.props.subject.last_survey}</div>
+                  <div className="custom_field">{this.props.subject.custom_field || '-'}</div>
                 </div>
+                <div>test</div>
                 <div className="">
                   <a onClick={(e)=>{e.preventDefault(); this.selectSubject()}} className="secondary-content">
                     <i className="material-icons">navigate_next</i>

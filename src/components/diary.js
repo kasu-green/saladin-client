@@ -99,7 +99,7 @@ class Diary extends Component {
     let date = moment(diary_date).format(this.props.locale.dateFormat);
     return (
       <div>
-        <Header title={"Carnet Alimentaire "+date}></Header>
+        <Header title={"Carnet Alimentaire "+date} backTo={()=>{this.props.history.push(`/survey/${subject_id}/edit/${survey_id}`)}}/>
         <div className="header-wrapper">
         <DiaryForm onSubmit={this.onSubmit.bind(this)}/>
         {this.renderDiary(this.props.diary.diary)}

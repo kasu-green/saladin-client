@@ -81,8 +81,8 @@ class SurveyForm extends Component {
       )
     }else{
       debugger;
-
-      return (<CollectionTitle onClick={()=>{this.setState({edit:true})}} title={"consultation "+this.props.survey.date}/>)
+      let display_date = Moment(this.props.survey.date).format(this.props.locale.dateFormat);
+      return (<CollectionTitle onClick={()=>{this.setState({edit:true})}} title={"consultation "+display_date}/>)
     }
   }
 }
@@ -104,7 +104,8 @@ SurveyForm =   connect(
     state => ({
     initialValues: state.survey, // pull initial values from account reducer
     survey : state.survey,
-    subject:state.subject
+    subject:state.subject,
+    locale:state.locale
   }),null
   )(SurveyForm);
 

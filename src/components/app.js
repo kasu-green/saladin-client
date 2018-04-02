@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Login from './login';
 import { BrowserRouter, Route, Switch,browserHistory} from 'react-router-dom';
+
 import SubjectList from './subject-list';
 import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
 import Survey from './survey';
 import Diary from './diary';
+
 
 export default class App extends Component {
   render() {

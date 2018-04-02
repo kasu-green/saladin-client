@@ -31,10 +31,10 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-1']
         }
       },
-      {
-          test: /\.css$/,
-          loaders: ['style-loader','css-loader']
-        },
+    {
+        test: /\.css$/,
+        loaders: ['style-loader','css-loader']
+      },
         { test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader?limit=100000' },
       {
         test: /\.scss$/,

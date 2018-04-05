@@ -7,11 +7,21 @@ import {Link} from 'react-router-dom';
 import SubjectCell from './subject-cell';
 import SearchBar from './search-bar';
 import Header from './header';
+import Loading from "./loading";
 
 class SubjectList extends Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      loaded:false
+    }
+  }
   componentDidMount(){
     console.log('mount');
-    this.props.fetchSubjects();
+    this.props.fetchSubjects().then(()=>{
+      this.setState({loaded:true});
+    });
   }
 
   renderSubjects(){
@@ -19,25 +29,40 @@ class SubjectList extends Component{
       return (<SubjectCell history={this.props.history} key={subject._id} subject={subject}/>)
     });
   }
+  renderLoading(){
+    if(!this.state.loaded){
+    return (<Loading></Loading>)
+    }
+  }
+  renderList(){
+    if(this.state.loaded){
+    return (
+
+        <ul id="listSubjects" className="collection">
+          {this.renderSubjects()}
+        </ul>
+
+
+
+      )
+    }
+  }
   render(){
     return (
       <div>
 
       <Header title="Sujets"/>
       <section className="main flex flex-column align-center just-center">
+
         <SearchBar/>
-
-
-        <ul id="listSubjects" className="collection">
-          {this.renderSubjects()}
-        </ul>
+        {this.renderLoading()}
+        {this.renderList()}
 
         <div className="fixed-action-btn">
           <Link to="/subjects/add" id="addSubject" className="btn-floating btn-large waves-effect waves-light red">
             <i className="material-icons">add</i>
           </Link>
         </div>
-
       </section>
 
 

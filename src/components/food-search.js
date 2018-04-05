@@ -53,10 +53,10 @@ class FoodSearch extends Component {
    render() {
      const {meta:{touched,invalid,pristine}} = this.props;
      return (
-       <div className="search-bar">
+       <div className="search-bar food-search">
         <input
 
-
+          placeholder= "Chercher un aliment"
           onClick = {(e)=>{ e.currentTarget.select()}}
           value = {this.state.term}
           onChange={(e)=>this.onInputChange(e.target.value)} />

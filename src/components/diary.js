@@ -6,7 +6,8 @@ import {availableBreakdown,_translate} from '../config';
 import DiaryForm from './diary-form';
 import Header from './header';
 import moment from 'moment';
-
+import CollectionTitle from './collection-title';
+import FoodSummary from './food-summary';
 class Diary extends Component {
   constructor(props){
     super(props);
@@ -64,10 +65,10 @@ class Diary extends Component {
   }
 
   renderIngesta(ingesta){
-    return ingesta.map((item)=>{
-
+    return ingesta.map((item,idx)=>{
+      debugger;
       return (
-        <li className="food" key={item._id}>
+        <li className="food" key={item.food.ID+""+idx}>
           <span className="food_name">{_translate(this.props.locale.language,item.food.translation,'name')}</span>
           &nbsp;<span className="food_quantity">{item.qty} g</span>
           <div className="food_stats">{this.renderFoodStat(item.components)}</div>
@@ -77,10 +78,11 @@ class Diary extends Component {
   renderDiary(diary){
 
     return _.map(diary,(breakdown,key)=>{
+      debugger;
       return (
-        <ul key={breakdown._id}>
+        <ul key={breakdown.key}>
 
-          <li  className="breakdown">
+          <li key={breakdown.key+"__"} className="breakdown">
             <span>{_translate(this.props.locale.language,availableBreakdown[key].translation,'name')}</span>
             <span className="food_stats">{this.renderFoodStat(breakdown.summary)}</span></li>
           {this.renderIngesta(breakdown.ingesta)}
@@ -95,21 +97,25 @@ class Diary extends Component {
       return (<li key={summary.component}>{this.renderComponent(summary)}</li>)
     });
   }
+
   render(){
     const {subject_id,survey_id,diary_date} = this.props.match.params;
     let date = moment(diary_date).format(this.props.locale.dateFormat);
     return (
       <div>
-        <Header title={"Carnet Alimentaire "+date} backTo={()=>{this.props.history.push(`/survey/${subject_id}/edit/${survey_id}`)}}/>
-        <div className="header-wrapper">
-        <DiaryForm onSubmit={this.onSubmit.bind(this)}/>
-        {this.renderDiary(this.props.diary.diary)}
+        <Header title={date} backTo={()=>{this.props.history.push(`/survey/${subject_id}/edit/${survey_id}`)}}/>
+        <section className="with-header-nospace flex flex-column align-center just-center">
 
-        <h3>Résumé du jour</h3> <br/>
-        <ul className="summary">
-          {this.renderSummary()}
-        </ul>
-        </div>
+            <DiaryForm onSubmit={this.onSubmit.bind(this)}/>
+            <CollectionTitle title="Carnet"/>
+            {this.renderDiary(this.props.diary.diary)}
+
+            <CollectionTitle title="Résumé du jour"/>
+
+            <FoodSummary summary={this.props.diary.summary}/>
+
+
+        </section>
       </div>
     );
   }

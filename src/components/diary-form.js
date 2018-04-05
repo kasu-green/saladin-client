@@ -29,7 +29,7 @@ class DiaryForm extends Component {
 
       const {handleSubmit} = this.props;
       return (
-        <div>
+        <div className="diary-form">
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
           <div className="row">
 
@@ -37,10 +37,10 @@ class DiaryForm extends Component {
             </div>
 
             <div className="row">
-                <Field name="qty" placeholder="Quantité (grammes / ml)"  type="text" component="input"></Field>
+                <Field name="qty" className="qty" placeholder="Quantité (grammes / ml)"  type="text" component="input"></Field>
             </div>
             <div className="row">
-              <Field name="breakdown" component="select">
+              <Field name="breakdown" className="breakdown" component="select">
                 {this.renderOptions()}
               </Field>
             </div>

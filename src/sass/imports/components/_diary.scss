@@ -8,3 +8,43 @@
 .food_name{
   font-weight: bold;
 }
+
+.diary-form{
+  width:100%;
+}
+
+.food-search input{
+  background: url(/img/ico-carrot.png) no-repeat scroll 3px 3px;
+  padding-left:33px;
+}
+
+.diary-form input.qty{
+  background: url(/img/ico-scale.png) no-repeat scroll 1px 1px;
+  padding-left:33px;
+
+}
+
+.diary-form select.breakdown{
+  background: url(/img/ico-clock.png) no-repeat scroll -10px -10px;
+  padding-left:33px;
+
+}
+.diary-form input, .diary-form select{
+
+  border: none;
+  border-bottom:1px solid grey;
+}
+.diary-form button{
+  width:100%;
+  background-color: white;
+  min-height: 36px;
+  border:none;
+
+}
+.autocomplete{
+  position:absolute;
+  background-color: white;
+  max-width: 100vw;
+  max-height: calc(100vh /2);
+  overflow-y: scroll;
+}

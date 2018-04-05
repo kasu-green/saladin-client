@@ -7,11 +7,23 @@ import Header from './header';
 import SurveyCell from './survey-cell';
 import CollectionTitle from './collection-title';
 import CollectionItem from './collection-item';
-class SurveyList extends Component {
+import Loading from "./loading";
 
+class SurveyList extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      loaded:false
+    }
+  }
   componentDidMount(){
     debugger;
-    this.props.fetchSurveys(this.props.match.params.subject_id);
+    this.props.fetchSurveys(this.props.match.params.subject_id).then(
+      ()=>{
+        this.setState({loaded:true});
+      }
+    );
   }
 
   newSurvey(){
@@ -34,7 +46,11 @@ class SurveyList extends Component {
       return (<CollectionItem text="aucune enquête trouvée"/>)
     }
   }
-
+  renderLoading(){
+    if(!this.state.loaded){
+    return (<Loading></Loading>)
+    }
+  }
   render(){
 
     return (
@@ -44,6 +60,7 @@ class SurveyList extends Component {
         <section className="with-header-nospace flex flex-column align-center just-center">
 
           <CollectionTitle title="Enquêtes Alimentaires"/>
+          {this.renderLoading()}
           {this.renderEmptyList()}
           <ul className="collection">
             {this.renderList()}

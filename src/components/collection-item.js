@@ -15,8 +15,6 @@ export default class CollectionItem extends Component{
           <i className="material-icons">{icon}</i>
         </a>
       </div>)
-    }else{
-      return <div></div>
     }
   }
 

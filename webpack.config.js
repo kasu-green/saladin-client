@@ -1,6 +1,8 @@
 var path = require( "path" );
 var webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+console.log(__dirname);
 module.exports = {
   entry: [
     './src/index.js'
@@ -11,11 +13,14 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, 'img'), to: path.resolve(__dirname, 'dist/img')
+    }]),
     new HtmlWebpackPlugin({
 
         template:'index.html'
     }),
+
     new webpack.optimize.UglifyJsPlugin({
        compressor: {
            warnings: false

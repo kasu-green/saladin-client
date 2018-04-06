@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
+import { Field, reduxForm } from 'redux-form';
+import {connect} from 'react-redux';
+import {authenticate} from '../actions';
 
-
-
-export default class Login extends Component{
+class Login extends Component{
   constructor(props){
     super(props);
 
   }
-  onFormSubmit (event){
-      event.preventDefault();
-      window.location.href='/subjects' ;
+  submitForm (values){
+    //  event.preventDefault();
+    //  window.location.href='/subjects' ;
+    this.props.authenticate(values.email,values.password);
   }
   render(){
+    const {handleSubmit} = this.props;
     return (
       <section className="cover flex flex-column align-center just-center">
         <h1>Bienvenue sur Saladin !</h1>
-        <form onSubmit={this.onFormSubmit} className="flex flex-column">
-          <input className="email" type="text" placeholder="email"/>
-          <input className="password" type="password" placeholder="password"/>
+        <form onSubmit={handleSubmit(this.submitForm.bind(this))}  className="flex flex-column">
+          <Field name="email" placeholder="E-mail address"  component="input" type="input"/>
+          <Field name="password" placeholder="Password"   component="input" type="password" />
+
           <button className="submit">Se connecter</button>
           <p id="switchForm">
             Si vous ne possédez pas de compte,<br/>
@@ -28,3 +32,20 @@ export default class Login extends Component{
       </section>)
   }
 }
+
+function validate(values ){
+  const errors = {};
+  if(!values.email){
+    errors.email = "Enter an email address";
+  }
+  return errors;
+}
+
+Login = reduxForm({
+  validate,
+  form:'login'
+})(Login);
+
+Login = connect(null,{authenticate})(Login);
+
+export default Login

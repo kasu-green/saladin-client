@@ -16,11 +16,25 @@ export const ADD_INGESTA = 'ADD_INGESTA';
 export const SELECT_SUBJECT = 'SELECT_SUBJECT';
 export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
 
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const UNAUTHENTICATED = 'UNAUTHENTICATED';
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
-export const ROOT_URL= 'http://it.geekagency.ch:3000/';
+
+export const ROOT_URL= 'http://localhost:3000/';
 export const API_KEY = '?key=abcdef';
 export const getAPIUrl=(urlpart)=>{
   return `${ROOT_URL}${urlpart}${API_KEY}`;
+}
+
+export const createRequest=  (urlpart)=>{
+  const url = getAPIUrl(urlpart);
+
+  return axios.create({
+    baseURL: ROOT_URL,
+    timeout: 1000,
+    headers: {'Authorization': 'Bearer '+ localStorage.getItem('token')}
+  });
 }
 
 export const EMPTY_SURVEY =  {
@@ -30,6 +44,35 @@ export const EMPTY_SURVEY =  {
     comment:'',
     diaries:[]
 };
+
+export function authenticate(email,password){
+  /*const URL = `${ROOT_URL}user/authenticate/${API_KEY}`;
+  var request = axios.post(URL,{email,password});
+  return {
+    type: AUTHENTICATE,
+    subject: request
+  }
+*/
+debugger;
+  return async (dispatch) => {
+
+    try {
+debugger;
+      const URL = `${ROOT_URL}user/authenticate/`;
+      const res = await axios.post(URL,{email,password});
+
+      dispatch({ type: AUTHENTICATED });
+      localStorage.setItem('token', res.data.token);
+    //  history.push('/secret');
+    } catch(error) {
+      debugger;
+      dispatch({
+        type: AUTHENTICATION_ERROR,
+        payload: 'Invalid email or password'
+      });
+    }
+  };
+}
 
 export function changeLocale(newLocale){
   return {
@@ -72,8 +115,9 @@ export function saveSubject(number,custom_field){
 }
 
 export function fetchSubjects(){
-  const URL = `${ROOT_URL}subjects${API_KEY}`;
-  var request = axios.get(URL);
+  //const URL = `${ROOT_URL}subjects${API_KEY}`;
+  //var request = axios.get(URL);
+  var request = createRequest().get('subjects');
   return {
     type:FETCH_SUBJECTS,
     payload:request

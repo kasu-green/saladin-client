@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "moment": "^2.21.0",
     "onsenui": "^2.9.2",
@@ -56,6 +57,7 @@
     "react-widgets-moment": "^4.0.9",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
   }
 }

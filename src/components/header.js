@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 
 import React, {Component} from 'react';
 
@@ -15,9 +15,19 @@ export default class Header extends Component{
       return (<img onClick={backTo} src="/img/ico-back.png" />)
     }
   }
-
+  renderTools(){
+    const{backTo,title,noTools} = this.props;
+    if(_.isUndefined(noTools) || !noTools){
+      return (
+    <div className="header_buttons">
+      <Link to="/profile">
+        <i className="material-icons">perm_identity</i>
+      </Link>
+    </div>)
+    }
+  }
   render(){
-    const{backTo,title} = this.props;
+    const{backTo,title,noTools} = this.props;
     return (
 
       <header>
@@ -30,8 +40,9 @@ export default class Header extends Component{
             <h2 className="self-center">{title}</h2>
           </div>
           <div className="flex">
-            <div id="btnLinksList"></div>
-            <button id="logout">logout</button>
+          {this.renderTools()}
+
+
           </div>
         </nav>
         </div>

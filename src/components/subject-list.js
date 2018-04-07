@@ -17,6 +17,16 @@ class SubjectList extends Component{
       loaded:false
     }
   }
+
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    debugger;
+    // You can also log the error to an error reporting service
+  //  logErrorToMyService(error, info);
+  }
+
+
   componentDidMount(){
     console.log('mount');
     this.props.fetchSubjects().then(()=>{
@@ -47,6 +57,11 @@ class SubjectList extends Component{
       )
     }
   }
+  renderError(){
+    if(this.props.error){
+      return (<div className="error">Une erreur est survenue: {this.props.error_message}</div>)
+    }
+  }
   render(){
     return (
       <div>
@@ -55,6 +70,7 @@ class SubjectList extends Component{
       <section className="main flex flex-column align-center just-center">
 
         <SearchBar/>
+        {this.renderError()}
         {this.renderLoading()}
         {this.renderList()}
 
@@ -72,8 +88,11 @@ class SubjectList extends Component{
 }
 
 function mapStateToProps({subjects}){
-  const {filter, data} = subjects;
+  const {filter, data, error,error_message} = subjects;
+  debugger;
   return {
+    error:error,
+    error_message,
     subjects: data.filter( (item) => {
         debugger;
         if(!item.custom_field){

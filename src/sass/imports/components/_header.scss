@@ -36,11 +36,14 @@ header {
   h2 {
     line-height: inherit;
     font-family: 'arial';
-  
+
   }
 
 } /* Fin Header */
 
 .header-wrapper{
   padding-top:$header_height;
+}
+.header_buttons{
+  padding-top: 6px;
 }

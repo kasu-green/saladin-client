@@ -14,7 +14,7 @@ import App from './components/app';
 import reducers from './reducers';
 
 import './sass/style.scss';
-import {AUTHENTICATED} from './actions';
+import {checkSession} from './actions';
 
 
 
@@ -24,7 +24,7 @@ const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 
 if(token) {
-  store.dispatch({ type: AUTHENTICATED });
+  store.dispatch(checkSession());
 }
 
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {authenticate} from '../actions';
 
 class Login extends Component{
@@ -13,22 +14,46 @@ class Login extends Component{
     //  window.location.href='/subjects' ;
     this.props.authenticate(values.email,values.password);
   }
-  render(){
+
+  renderForm(){
     const {handleSubmit} = this.props;
+    if(!this.props.auth.authenticated){
+      return (
+        <div>
+          <h1>Bienvenue sur Saladin !</h1>
+
+          <span>{this.props.auth.error}</span>
+          <form onSubmit={handleSubmit(this.submitForm.bind(this))}  className="flex flex-column">
+            <Field name="email" placeholder="E-mail address"  component="input" type="input"/>
+            <Field name="password" placeholder="Password"   component="input" type="password" />
+            <button className="submit">Se connecter</button>
+            <p id="switchForm">
+              Si vous ne possédez pas de compte,<br/>
+            <Link to="/register">cliquez-ici</Link>
+            </p>
+          </form>
+        </div>)
+    }
+  }
+
+  renderLogged(){
+    if(this.props.auth.authenticated){
+      return(
+        <div>Welcome Back ! <br/>
+          <Link to="/subjects">Cliquez ici pour continuer</Link>
+         </div>
+
+
+      )
+    }
+  }
+
+  render(){
+
     return (
       <section className="cover flex flex-column align-center just-center">
-        <h1>Bienvenue sur Saladin !</h1>
-        <form onSubmit={handleSubmit(this.submitForm.bind(this))}  className="flex flex-column">
-          <Field name="email" placeholder="E-mail address"  component="input" type="input"/>
-          <Field name="password" placeholder="Password"   component="input" type="password" />
-
-          <button className="submit">Se connecter</button>
-          <p id="switchForm">
-            Si vous ne possédez pas de compte,<br/>
-            <span className="underline">cliquez-ici</span>
-          </p>
-        </form>
-
+        {this.renderForm()}
+        {this.renderLogged()}
       </section>)
   }
 }
@@ -43,9 +68,9 @@ function validate(values ){
 
 Login = reduxForm({
   validate,
-  form:'login'
+  form:'login',
 })(Login);
 
-Login = connect(null,{authenticate})(Login);
+Login = connect(state=>( {  auth: state.auth }),{authenticate})(Login);
 
 export default Login

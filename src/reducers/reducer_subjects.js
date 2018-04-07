@@ -3,16 +3,26 @@ import _ from 'lodash';
 
 const initialState = {
   filter:'',
-  data:[]
+  data:[],
+  error:false,
+  error_message:''
 }
 
 export default function (state=initialState,action){
   console.log(action);
+  debugger;
   switch(action.type){
 
     case FETCH_SUBJECTS:
+      let   data = action.payload.data;
 
-        return Object.assign({},state,{data:action.payload.data});
+      if(_.isUndefined(action.payload.data) || action.error){
+        data = []
+      }
+
+
+
+      return Object.assign({},state,{data:data,error:action.error,error_message:action.payload.message});
 
     break;
     case SEARCH_SUBJECTS:

@@ -40,7 +40,7 @@ class FoodSummary extends Component{
       <ul className="collection">
         {_.map(this.props.summary,(summary)=>(
           <li key={summary.component} className="collection-item" >
-            <CollectionItem   text={this.componentName(summary.component)} subtext="" centerText={summary.qty+" "+this.componentUnit(summary.component)}/>
+            <CollectionItem   text={this.componentName(summary.component)} subtext="" centerText={summary.qty.toFixed(2)+" "+this.componentUnit(summary.component)}/>
           </li>
           )
         )}

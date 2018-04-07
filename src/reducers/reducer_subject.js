@@ -2,7 +2,7 @@ import {SELECT_SUBJECT} from '../actions/index';
 import _ from 'lodash';
 
 const initialState = {
-
+  
 }
 
 export default function (state=initialState,action){
@@ -14,7 +14,7 @@ export default function (state=initialState,action){
         return Object.assign({},action.payload);
 
     break;
-    default:  
+    default:
     return state;
   }
 }

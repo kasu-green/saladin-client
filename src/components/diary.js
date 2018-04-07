@@ -45,7 +45,7 @@ class Diary extends Component {
         componentUnitTranslation = _translate(this.props.locale.language,this.props.components[item.component].translation,'unit');
       }
       return (<span key={item.component}>
-        {componentTranslation} {item.qty} {componentUnitTranslation},&nbsp;
+        {componentTranslation} {item.qty.toFixed(2)} {componentUnitTranslation},&nbsp;
         </span>);
     });
 
@@ -60,7 +60,7 @@ class Diary extends Component {
       componentUnitTranslation = _translate(this.props.locale.language,this.props.components[component.component].translation,'unit');
     }
     return (<span key={component.component}>
-      {componentTranslation} {component.qty} {componentUnitTranslation}
+      {componentTranslation} {component.qty.toFixed(2)} {componentUnitTranslation}
       </span>);
   }
 

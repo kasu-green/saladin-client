@@ -35,7 +35,7 @@ export default class App extends Component {
               <Route path="/subjects" component={AuthenticatedComponent(SubjectList)}/>
               <Route path="/profile" component={AuthenticatedComponent(Profile)}/>
               <Route path="/register" component={Register}/>
-              <Route path="/" component={PublicComponent(Login)}/>
+              <Route path="/" component={Login}/>
           </Switch>
         </div>
       </BrowserRouter>

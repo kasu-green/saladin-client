@@ -6,6 +6,8 @@ import Moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
 import 'react-widgets/dist/css/react-widgets.css';
 import CollectionTitle from './collection-title';
+
+import {fetchPresets} from '../actions';
 import _ from 'lodash';
 Moment.locale('fr');
 momentLocalizer();
@@ -22,6 +24,10 @@ class SurveyForm extends Component {
       edit:edit
     }
 
+  }
+
+  componentDidMount(){
+    this.props.fetchPresets();
   }
 
 
@@ -57,6 +63,13 @@ class SurveyForm extends Component {
           {touched && error && <span>{error}</span>}
     </div>);
   };
+  renderOptions(){
+    return _.map(this.props.presets,(preset)=>{
+      return (
+          <option value={preset._id} key={preset._id}>{preset.name}</option>
+        )
+    });
+  }
 
 
   render(){
@@ -72,6 +85,11 @@ class SurveyForm extends Component {
             </div>
             <div className="row">
               <Field name="comment" className="" placeholder="Commentaire" label=" Commentaire" component="input"></Field>
+            </div>
+            <div className="row">
+              <Field name="preset" component="select">
+                  {this.renderOptions()}
+              </Field>
             </div>
             <button className="btn main">Enregistrer</button>
             <button className="btn main" type="button" onClick={()=>{this.setState({edit:false})}}>Annuler</button>
@@ -105,8 +123,9 @@ SurveyForm =   connect(
     initialValues: state.survey, // pull initial values from account reducer
     survey : state.survey,
     subject:state.subject,
-    locale:state.locale
-  }),null
+    locale:state.locale,
+    presets:state.presets
+  }),{fetchPresets}
   )(SurveyForm);
 
 export default SurveyForm;

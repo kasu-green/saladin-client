@@ -2,31 +2,39 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {addSubject,saveSubject} from '../actions';
+import {addSubject,saveSubject,fetchPresets} from '../actions';
 class SubjectForm extends Component{
 
   constructor(props){
     super(props);
-    this.state = {identifier:'0000',custom_field:'',redirect:false,loaded:false};
+    this.state = {identifier:'0000',custom_field:'',preset:null,redirect:false,loaded:false};
 
     this.submitForm = this.submitForm.bind(this);
   }
 
   componentDidMount(){
-    const promise = this.props.addSubject();
 
-    promise.subject.then(data=>{
-      //debugger;
-      this.setState({loaded:true,_id:data.data._id});
-    });
+    this.props.fetchPresets().then(()=>{
+      var preset = this.props.presets[Object.keys(this.props.presets)[0]];
+
+      var preset_id = preset._id;
+      const promise = this.props.addSubject();
+
+      promise.subject.then(data=>{
+        //debugger;
+        this.setState({loaded:true,_id:data.data._id,preset:preset_id});
+      });
+
+    })
+
   }
 
   submitForm(e){
 
     e.preventDefault();
-    const{_id,custom_field} = this.state;
-    const promise = this.props.saveSubject(_id,custom_field);
-    
+    const{_id,custom_field,preset} = this.state;
+    const promise = this.props.saveSubject(_id,custom_field,preset);
+
     promise.subject.then(data=>{
           this.props.history.push('/subjects');
     }).catch(error=>{
@@ -34,6 +42,13 @@ class SubjectForm extends Component{
     });
 
 
+  }
+  renderOptions(){
+    return _.map(this.props.presets,(preset)=>{
+      return (
+          <option value={preset._id} key={preset._id}>{preset.name}</option>
+        )
+    });
   }
   render(){
     if(!this.state.loaded){
@@ -52,6 +67,12 @@ class SubjectForm extends Component{
               <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
               <label htmlFor="last_name">Champ personnalisé</label>
             </div>
+            <div className="input-field col s6">
+              <select name="preset"  onChange={(e)=>{
+                    this.setState({preset:e.target.value})}}  className="breakdown" >
+                {this.renderOptions()}
+              </select>
+            </div>
           </div>
           <button className="btn">Create</button>
           <Link to="/subjects" className="btn ">Cancel</Link>
@@ -63,4 +84,4 @@ class SubjectForm extends Component{
   }
 }
 
-export default connect(null,{addSubject,saveSubject})(SubjectForm);
+export default connect((state)=>{return {presets:state.presets}},{addSubject,fetchPresets,saveSubject})(SubjectForm);

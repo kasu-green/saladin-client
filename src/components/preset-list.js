@@ -1,14 +1,20 @@
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import {fetchPresets} from '../actions';
+import {fetchPresets,EMPTY_PRESET} from '../actions';
 import  _ from 'lodash';
 import CollectionItem from './collection-item';
 
 import PresetForm from './preset-form';
 
 class PresetList extends Component{
+  constructor(props){
+    super(props);
 
+    this.state = {
+      add:false
+    }
+  }
   componentDidMount(){
     this.props.fetchPresets();
   }
@@ -26,7 +32,11 @@ class PresetList extends Component{
         </li>)
     });
   }
-
+  renderAdd(){
+    if(this.state.add){
+      return (<PresetForm name={"preset_new"} afterAdd={()=>{this.setState({add:false})}} edit={true} preset={EMPTY_PRESET}/>)
+    }
+  }
   render(){
 
     return (
@@ -34,6 +44,8 @@ class PresetList extends Component{
         <h3>Presets</h3>
         <ul className="collection">
           {this.renderPresets()}
+          {this.renderAdd()}
+          <button onClick={()=>{this.setState({add:true})}}>ajouter</button>
         </ul>
       </div>
     );

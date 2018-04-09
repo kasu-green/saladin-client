@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import Moment from 'moment';
 import CollectionItem from './collection-item';
 import _ from 'lodash';
-import {fetchComponents} from '../actions';
+import {fetchComponents,addPreset,updatePreset} from '../actions';
 import {_translate} from '../config';
 import CheckboxGroup from './checkboxgroup';
 class PresetForm extends Component {
@@ -23,11 +23,34 @@ class PresetForm extends Component {
   componentDidMount(){
     this.props.fetchComponents();
   }
-
+  resetForm(){
+    debugger;
+    this.props.reset() ;
+    this.setState({edit:false})
+  }
   submitForm(values){
   /*
     this.props.onSubmitForm(values);
     this.setState({edit:false});*/
+
+    if(this.props.preset._id != 0){
+      //update
+      this.props.updatePreset(values).then(()=>{
+
+        this.props.reset();
+        this.setState({edit:false});
+      });
+    }else{
+      //create
+      this.props.addPreset(values).then(()=>{
+
+        this.props.reset();
+        this.setState({edit:false});
+        if(!_.isUndefined(this.props.afterAdd)){
+          this.props.afterAdd();
+        }
+      });
+    }
   }
 
   renderField(field){
@@ -56,7 +79,7 @@ class PresetForm extends Component {
 
   renderComponentsCheckboxes(){
     let optionsList = _.map(this.props.components,(component)=>{
-      debugger;
+
       return {id:component._id,name:this.componentName(component._id)};
     })
     return (<Field name="components" component={CheckboxGroup} options={optionsList} />)
@@ -79,7 +102,7 @@ class PresetForm extends Component {
                 this.renderComponentsCheckboxes()
             }
             <button className="btn main">Enregistrer</button>
-            <button className="btn main" type="button" onClick={()=>{this.setState({edit:false})}}>Annuler</button>
+            <button className="btn main" type="button" onClick={this.resetForm.bind(this)}>Annuler</button>
           </form>
         </div>
 
@@ -104,6 +127,7 @@ function validate(values ){
 
 
 const mapStateToProps = (state, ownProps) => {
+
     return {
         form: ownProps.name,
         initialValues: ownProps.preset,
@@ -114,9 +138,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 PresetForm = compose(
-    connect(mapStateToProps,{fetchComponents}),
+    connect(mapStateToProps,{fetchComponents,addPreset,updatePreset}),
     reduxForm({
-      validate
+      validate,
+      enableReinitialize:true
         //other redux-form options...
     })
 )(PresetForm);

@@ -47,7 +47,15 @@ export const EMPTY_SURVEY =  {
     date: Moment().format('YYYY-MM-DD'),
     subject_id: -1,
     comment:'',
+    preset:null,
     diaries:[]
+};
+
+export const EMPTY_PRESET =  {
+    _id:-null,
+    components:[],
+    name:'New preset',
+    desc:''
 };
 
 
@@ -137,6 +145,26 @@ export function fetchPresets(){
   }
 }
 
+
+export function addPreset(values){
+
+  var request = createRequest().post('presets',values);
+  return {
+    type: ADD_PRESET,
+    payload: request
+  }
+}
+
+
+export function updatePreset(values){
+
+  var request = createRequest().post('presets/'+values._id,values);
+  return {
+    type: UPDATE_PRESET,
+    payload: request
+  }
+}
+
 export function addSubject(){
 
   var request = createRequest().post('subjects');
@@ -146,10 +174,10 @@ export function addSubject(){
   }
 }
 
-export function saveSubject(number,custom_field){
+export function saveSubject(number,custom_field,preset){
   const URL = `subjects/${number}`;
   //var request = axios.post(URL,{custom_field});
-  var request = createRequest().post(URL,{custom_field});
+  var request = createRequest().post(URL,{custom_field,preset});
   return {
     type: UPDATE_SUBJECT,
     subject: request
@@ -216,7 +244,7 @@ export function updateSurvey(subject_id,survey_id,values){
   }
 }
 
-export function newSurvey (){
+export function newSurvey (preset=null){
   return {
     type:ADD_SURVEY,
     payload:{data:EMPTY_SURVEY}

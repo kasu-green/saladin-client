@@ -28,7 +28,7 @@ export default function (state=initialState,action){
     case ADD_INGESTA:
     case FETCH_DIARY:
       let diaryDay = action.payload.data.diary;
-      debugger;
+      //debugger;
       let diary = _.reduce(diaryDay , function(obj,item) {
        obj[item.key] = item;
        return obj;

@@ -6,7 +6,7 @@ export default function (ComposedComponent) {
   class Authentication extends Component {
     componentWillMount() {
 
-      debugger;
+      //debugger;
       this.props.checkSession().then(()=>{
         if (!this.props.authenticated) {
           this.props.history.push('/');
@@ -17,7 +17,7 @@ export default function (ComposedComponent) {
     }
 
     componentWillUpdate(nextProps) {
-      debugger;
+      //debugger;
       if (!nextProps.authenticated) {
         this.props.history.push('/');
       }

@@ -19,7 +19,7 @@ class FoodSummary extends Component{
   componentName(component){
 
     let componentTranslation = 'not found';
-    debugger;
+    //debugger;
     if(this.props.components[component]){
       componentTranslation = _translate(this.props.locale.language,this.props.components[component].translation,'name');
     }
@@ -28,7 +28,7 @@ class FoodSummary extends Component{
   componentUnit(component){
 
     let componentTranslation = 'N/A';
-    debugger;
+    //debugger;
     if(this.props.components[component]){
       componentTranslation = _translate(this.props.locale.language,this.props.components[component].translation,'unit');
     }

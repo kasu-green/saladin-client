@@ -16,7 +16,7 @@ class SubjectForm extends Component{
     const promise = this.props.addSubject();
 
     promise.subject.then(data=>{
-      debugger;
+      //debugger;
       this.setState({loaded:true,_id:data.data._id});
     });
   }

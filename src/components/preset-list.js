@@ -5,7 +5,7 @@ import {fetchPresets} from '../actions';
 import  _ from 'lodash';
 import CollectionItem from './collection-item';
 
-
+import PresetForm from './preset-form';
 
 class PresetList extends Component{
 
@@ -15,13 +15,14 @@ class PresetList extends Component{
 
   renderPresets(){
     return _.map(this.props.presets,(preset)=>{
-      debugger;
+      //debugger;
       let icon = 'navigate_next';
       if(preset.user ==null){
         icon = 'lock_outline';
       }
+      //<CollectionItem text={preset.name} subtext={preset.desc} icon={icon} onClick={()=>{alert('not yet')}}/>
       return (<li key={preset._id} className="collection-item">
-          <CollectionItem text={preset.name} subtext={preset.desc} icon={icon} onClick={()=>{alert('not yet')}}/>
+          <PresetForm name={"preset_"+preset._id} edit={false} preset={preset}/>
         </li>)
     });
   }
@@ -30,8 +31,6 @@ class PresetList extends Component{
 
     return (
       <div className="presets-list">
-
-
         <h3>Presets</h3>
         <ul className="collection">
           {this.renderPresets()}

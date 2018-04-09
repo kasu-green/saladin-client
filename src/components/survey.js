@@ -34,7 +34,7 @@ class Survey extends Component {
 
       const promise = this.props.fetchSurvey(subject_id,survey_id);
 
-      debugger;
+      //debugger;
       promise.then(()=>{
         this.setState({loaded:true});
       });
@@ -69,7 +69,7 @@ class Survey extends Component {
 
     const {subject_id,survey_id,action} = this.props.match.params;
     //e.preventDefault();
-    debugger;
+    //debugger;
     console.log(values);
     if(action=='add'){
     this.props.addSurvey(subject_id,values).then((survey)=>{
@@ -94,7 +94,7 @@ class Survey extends Component {
   }
 
   newDiary(date){
-    debugger;
+    //debugger;
     this.setState({pickedDate:date});
     this.props.addSurveyDay(date,this.props.match.params.subject_id,this.props.survey._id);
     console.log(date);
@@ -130,7 +130,7 @@ class Survey extends Component {
       return Moment(diary.date).startOf('day');
     });
 
-    debugger;
+    //debugger;
     return (
       <div className="survey">
         <div className="row">
@@ -143,7 +143,7 @@ class Survey extends Component {
               });
 
               return ! _.isUndefined(found);
-            //debugger;
+            ////debugger;
             }}
           />
         </div>

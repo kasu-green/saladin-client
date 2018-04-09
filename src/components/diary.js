@@ -66,7 +66,7 @@ class Diary extends Component {
 
   renderIngesta(ingesta){
     return ingesta.map((item,idx)=>{
-      debugger;
+      //debugger;
       return (
         <li className="food" key={item.food.ID+""+idx}>
           <span className="food_name">{_translate(this.props.locale.language,item.food.translation,'name')}</span>
@@ -78,7 +78,7 @@ class Diary extends Component {
   renderDiary(diary){
 
     return _.map(diary,(breakdown,key)=>{
-      debugger;
+      //debugger;
       return (
         <ul key={breakdown.key}>
 
@@ -93,7 +93,7 @@ class Diary extends Component {
 
   renderSummary(){
     return _.map(this.props.diary.summary,(summary)=>{
-      debugger;
+      //debugger;
       return (<li key={summary.component}>{this.renderComponent(summary)}</li>)
     });
   }

@@ -8,8 +8,12 @@ export default function (state=initialState,action){
   switch(action.type){
 
     case FETCH_PRESETS:
-
-        return [...action.payload.data];
+        // sort them by _id
+        let presets = _.reduce(action.payload.data , function(obj,item) {
+         obj[item._id] = item;
+         return obj;
+        }, {});
+        return presets;
 
     break;
     default:

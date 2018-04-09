@@ -29,7 +29,7 @@ class SurveyForm extends Component {
   submitForm(values){
   /*  const {subject_id} = this.props.match.params;
     //e.preventDefault();
-    debugger;
+    //debugger;
     console.log(values);
     this.props.addSurvey(subject_id,values).then((survey)=>{
       this.props.history.push('/survey/'+subject_id+'/edit/'+survey.payload.data._id);
@@ -51,7 +51,7 @@ class SurveyForm extends Component {
   }
   renderDatePicker(field){
     const {input:{value,onChange}, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
-    debugger;
+    //debugger;
     return (<div>
           <DateTimePicker onChange={onChange}  time={false} {...field.input} {...rest} onBlur={()=>{}}selected={defaultValue} />
           {touched && error && <span>{error}</span>}
@@ -80,7 +80,7 @@ class SurveyForm extends Component {
 
       )
     }else{
-      debugger;
+      //debugger;
       let display_date = Moment(this.props.survey.date).format(this.props.locale.dateFormat);
       return (<CollectionTitle onClick={()=>{this.setState({edit:true})}} title={"consultation "+display_date}/>)
     }

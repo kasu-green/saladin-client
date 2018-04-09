@@ -20,7 +20,7 @@ export default function (state=initialState,action){
     case ADD_SURVEY:
     case FETCH_SURVEY:
     case UPDATE_SURVEY:
-      debugger;
+      //debugger;
       action.payload.data._date = new Date(action.payload.data.date);
 
 
@@ -54,10 +54,10 @@ export default function (state=initialState,action){
       }*/
 
 
-      debugger;
+      //debugger;
 
       let o = _.find(diaries, function(d) {
-        debugger;
+        //debugger;
         return moment(d.date).startOf('day').isSame(moment(action.payload.data.date).startOf('day'));
       });
 

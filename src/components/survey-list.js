@@ -18,7 +18,7 @@ class SurveyList extends Component {
     }
   }
   componentDidMount(){
-    debugger;
+    //debugger;
     this.props.fetchSurveys(this.props.match.params.subject_id).then(
       ()=>{
         this.setState({loaded:true});

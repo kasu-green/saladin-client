@@ -21,7 +21,7 @@ class SubjectList extends Component{
   componentDidCatch(error, info) {
     // Display fallback UI
     this.setState({ hasError: true });
-    debugger;
+    //debugger;
     // You can also log the error to an error reporting service
   //  logErrorToMyService(error, info);
   }
@@ -90,12 +90,12 @@ class SubjectList extends Component{
 function mapStateToProps({subjects}){
   const { data, error,error_message} = subjects;
   let {filter} = subjects;
-  debugger;
+  //debugger;
   return {
     error:error,
     error_message,
     subjects: data.filter( (item) => {
-        debugger;
+        //debugger;
         if(!item.custom_field){
           item.custom_field = "";
         }

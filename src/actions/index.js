@@ -17,6 +17,11 @@ export const ADD_INGESTA = 'ADD_INGESTA';
 export const SELECT_SUBJECT = 'SELECT_SUBJECT';
 export const FETCH_COMPONENTS = 'FETCH_COMPONENTS';
 
+export const FETCH_PRESETS = 'FETCH_PRESETS';
+export const ADD_PRESET = 'ADD_PRESET';
+export const UPDATE_PRESET = 'UPDATE_PRESET';
+export const DELETE_PRESET = 'DELETE_PRESET';
+
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const UNAUTHENTICATED = 'UNAUTHENTICATED';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
@@ -44,6 +49,8 @@ export const EMPTY_SURVEY =  {
     comment:'',
     diaries:[]
 };
+
+
 
 export function authenticate(email,password){
 
@@ -120,6 +127,16 @@ export function searchSubjects(term){
 }
 
 
+
+export function fetchPresets(){
+
+  var request = createRequest().get('presets');
+  return {
+    type: FETCH_PRESETS,
+    payload: request
+  }
+}
+
 export function addSubject(){
 
   var request = createRequest().post('subjects');
@@ -130,7 +147,7 @@ export function addSubject(){
 }
 
 export function saveSubject(number,custom_field){
-  const URL = `subjects/${number}}`;
+  const URL = `subjects/${number}`;
   //var request = axios.post(URL,{custom_field});
   var request = createRequest().post(URL,{custom_field});
   return {

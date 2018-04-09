@@ -9,6 +9,7 @@ import LocaleReducer from './reducer-locale';
 import DiaryReducer from './reducer_diary';
 import ComponentsReducer from './reducer_components';
 import UserReducer from './reducer_user';
+import PresetsReducer from './reducer_presets';
 const rootReducer = combineReducers({
   subjects: SubjectsReducer, // current list of subjects
   subject: SubjectReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   foods: FoodSearch, // current food search
   locale: LocaleReducer, // current locale
+  presets:PresetsReducer,
   components: ComponentsReducer, // current list of subjects
   auth: UserReducer
 });

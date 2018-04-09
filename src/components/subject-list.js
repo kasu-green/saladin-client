@@ -14,7 +14,7 @@ class SubjectList extends Component{
     super(props);
 
     this.state = {
-      loaded:false
+      loaded: false
     }
   }
 
@@ -41,7 +41,7 @@ class SubjectList extends Component{
   }
   renderLoading(){
     if(!this.state.loaded){
-    return (<Loading></Loading>)
+      return (<Loading></Loading>)
     }
   }
   renderList(){
@@ -88,7 +88,8 @@ class SubjectList extends Component{
 }
 
 function mapStateToProps({subjects}){
-  const {filter, data, error,error_message} = subjects;
+  const { data, error,error_message} = subjects;
+  let {filter} = subjects;
   debugger;
   return {
     error:error,
@@ -98,6 +99,7 @@ function mapStateToProps({subjects}){
         if(!item.custom_field){
           item.custom_field = "";
         }
+        filter = filter.toLowerCase();
         const number = (''+item._id).toLowerCase();
         const custom_field = item.custom_field.toLowerCase();
 

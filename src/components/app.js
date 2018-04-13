@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from './login';
 import { BrowserRouter, Route, Switch,browserHistory} from 'react-router-dom';
 
-import SubjectList from './subject-list';
+import SubjectList from '../containers/subject-list';
 import SubjectForm from './subject-form';
 import SurveyList from './survey-list';
 import Survey from './survey';

@@ -7,55 +7,30 @@ import {Link} from 'react-router-dom';
 import SubjectCell from './subject-cell';
 import SearchBar from './search-bar';
 import Header from './header';
-import Loading from "./loading";
-
+import CollectionItem from './collection-item';
 class SubjectList extends Component{
-  constructor(props){
-    super(props);
 
-    this.state = {
-      loaded: false
-    }
-  }
-
-  componentDidCatch(error, info) {
-    // Display fallback UI
-    this.setState({ hasError: true });
-    //debugger;
-    // You can also log the error to an error reporting service
-  //  logErrorToMyService(error, info);
-  }
-
-
-  componentDidMount(){
-    console.log('mount');
-    this.props.fetchSubjects().then(()=>{
-      this.setState({loaded:true});
-    });
-  }
 
   renderSubjects(){
-    return this.props.subjects.map(subject=>{
-      return (<SubjectCell history={this.props.history} key={subject._id} subject={subject}/>)
-    });
+
+      return this.props.subjects.map(subject=>{
+        return (<SubjectCell history={this.props.history} key={subject._id} subject={subject}/>)
+      });
+
   }
-  renderLoading(){
-    if(!this.state.loaded){
-      return (<Loading></Loading>)
+  renderEmptyList(){
+    if(this.props.subjects.length == 0){
+      return (<CollectionItem text="aucune sujet trouvé"/>)
     }
   }
   renderList(){
-    if(this.state.loaded){
+
     return (
 
         <ul id="listSubjects" className="collection">
           {this.renderSubjects()}
         </ul>
-
-
-
       )
-    }
   }
   renderError(){
     if(this.props.error){
@@ -69,9 +44,9 @@ class SubjectList extends Component{
       <Header title="Sujets"/>
       <section className="main flex flex-column align-center just-center">
 
-        <SearchBar/>
+        <SearchBar searchCallback={this.props.searchCallback}/>
         {this.renderError()}
-        {this.renderLoading()}
+        {this.renderEmptyList()}
         {this.renderList()}
 
         <div className="fixed-action-btn">
@@ -86,7 +61,7 @@ class SubjectList extends Component{
     );
   }
 }
-
+/*
 function mapStateToProps({subjects}){
   const { data, error,error_message} = subjects;
   let {filter} = subjects;
@@ -107,4 +82,6 @@ function mapStateToProps({subjects}){
       } )};
 }
 
-export default connect(mapStateToProps,{fetchSubjects})(SubjectList);
+export default connect(mapStateToProps,{fetchSubjects})(SubjectList);*/
+
+export default SubjectList;

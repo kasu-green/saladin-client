@@ -5,7 +5,7 @@ import {searchSubjects} from '../actions';
   render(){
     return (
       <form className="subject_search_form" onSubmit={(e)=>{e.preventDefault()}} >
-          <input type="text" placeholder="Chercher un sujet ici..." onChange={(e)=>{this.props.searchSubjects(e.target.value)}}/>
+          <input type="text" placeholder="Chercher un sujet ici..." onChange={(e)=>{this.props.searchCallback(e.target.value)}}/>
 
       </form>
     );
@@ -13,4 +13,5 @@ import {searchSubjects} from '../actions';
 }
 
 
-export default connect(null,{searchSubjects})(SearchBar);
+//export default connect(null,{searchSubjects})(SearchBar);
+export default SearchBar;

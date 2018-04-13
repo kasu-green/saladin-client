@@ -6,8 +6,14 @@ import CollectionItem from './collection-item';
 
 export default function render(props){
   console.log(props);
-  return (<li className="collection-item" key="this.props.key">
+  return (
+      <li className="collection-item" key="this.props.key">
 
-            <CollectionItem text={"Enquête du "+moment(props.survey.date).format('DD/MM/YYYY')} subtext={props.survey.comment} onClick={props.onClick} icon="navigate_next"/>
-          </li>)
+        <CollectionItem
+          text={"Enquête du "+moment(props.survey.date).format('DD/MM/YYYY')}
+          subtext={props.survey.comment}
+          onClick={props.onClick}
+          icon="navigate_next"
+        />
+      </li>)
 }

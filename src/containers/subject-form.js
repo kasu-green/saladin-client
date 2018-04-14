@@ -48,7 +48,7 @@ class SubjectFormContainer extends Component{
     if(!this.state.loaded){
       return (<div>fetching a subject number... please wait</div>)
     }else{
-      return (<SubjectForm name="newSubject" subject={this.props.subject} submitForm={this.submitForm.bind(this)} cancelForm={this.cancelForm.bind(this)}/>)
+      return (<SubjectForm name="newSubject" subject={this.props.subject}   presets={this.props.presets} submitForm={this.submitForm.bind(this)} cancelForm={this.cancelForm.bind(this)}/>)
     }
   }
 }

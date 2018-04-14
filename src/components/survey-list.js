@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchSurveys,newSurvey} from '../actions';
+import {fetchSurveys,newSurvey,fetchSubject} from '../actions';
 import {Link} from 'react-router-dom';
 import {SearchBar} from './search-bar';
 import Header from './header';
@@ -19,16 +19,18 @@ class SurveyList extends Component {
   }
   componentDidMount(){
     //debugger;
-    this.props.fetchSurveys(this.props.match.params.subject_id).then(
-      ()=>{
-        this.setState({loaded:true});
-      }
-    );
+    this.props.fetchSubject(this.props.match.params.subject_id).then(()=>{
+      this.props.fetchSurveys(this.props.match.params.subject_id).then(
+        ()=>{
+          this.setState({loaded:true});
+        }
+      );
+    });
   }
 
   newSurvey(){
 
-    this.props.newSurvey();
+    this.props.newSurvey(this.props.subject.preset);
     this.props.history.push("/survey/"+this.props.match.params.subject_id+"/add");
   }
 
@@ -81,9 +83,10 @@ class SurveyList extends Component {
 function mapStateToProps({surveys,subject}){
   const {filter, data} = surveys;
   return {
+    subject: subject,
     surveys: data.filter( (item) => {
           return true;
       } )};
 }
 
-export default connect(mapStateToProps,{fetchSurveys,newSurvey})(SurveyList);
+export default connect(mapStateToProps,{fetchSurveys,newSurvey,fetchSubject})(SurveyList);

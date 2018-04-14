@@ -3,7 +3,7 @@ import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-
+import logger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 
 import ReduxPromise from 'redux-promise';
@@ -18,7 +18,7 @@ import {checkSession} from './actions';
 
 
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk,ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(logger,ReduxThunk,ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');

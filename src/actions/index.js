@@ -2,6 +2,7 @@ import axios from 'axios';
 import Moment from 'moment';
 import  history  from '../history';
 export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
+export const FETCH_SUBJECT = 'FETCH_SUBJECT';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
 export const ADD_SUBJECT = 'ADD_SUBJECT';
 export const ADD_SURVEY = 'ADD_SURVEY';
@@ -195,6 +196,16 @@ export function fetchSubjects(){
   }
 }
 
+export function fetchSubject(id){
+  //const URL = `${ROOT_URL}subjects${API_KEY}`;
+  //var request = axios.get(URL);
+  var request = createRequest().get('subjects/'+id);
+  return {
+    type:FETCH_SUBJECT,
+    payload:request
+  }
+}
+
 export function fetchSurveys(subject_id){
   debugger;
   const URL = `surveys/${subject_id}`;
@@ -246,9 +257,11 @@ export function updateSurvey(subject_id,survey_id,values){
 }
 
 export function newSurvey (preset=null){
+  let survey = Object.assign({},EMPTY_SURVEY);
+  survey.preset = preset;
   return {
     type:ADD_SURVEY,
-    payload:{data:EMPTY_SURVEY}
+    payload:{data:survey}
   }
 }
 

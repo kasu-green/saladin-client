@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { DateTimePicker } from 'react-widgets'
 import Moment from 'moment';
@@ -105,19 +106,26 @@ function validate(values ){
   return errors;
 }
 
-SurveyForm = reduxForm({
-  validate,
-  form:'addSurvey'
-})(SurveyForm);
 
-SurveyForm =   connect(
-    state => ({
-    initialValues: state.survey, // pull initial values from account reducer
-    survey : state.survey,
-    subject:state.subject,
-    locale:state.locale,
-    presets:state.presets
-  }),{fetchPresets}
-  )(SurveyForm);
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        form: ownProps.name,
+        initialValues: ownProps.survey,
+        presets:state.presets,
+        locale: state.locale,
+
+        // other props...
+    }
+}
+
+SurveyForm = compose(
+    connect(mapStateToProps,{fetchPresets}),
+    reduxForm({
+      validate,
+      enableReinitialize:true
+        //other redux-form options...
+    })
+)(SurveyForm);
 
 export default SurveyForm;

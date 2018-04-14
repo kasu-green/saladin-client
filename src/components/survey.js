@@ -61,24 +61,21 @@ class Survey extends Component {
       this.props.fetchSurvey(newProps.match.subject_id,newProps.match.survey_id);
     }
 */  if(newProps.match.params.action != this.props.match.params.action){
-    //  this.reloadComponentData();
+      this.reloadComponentData();
     }
   }
 
   submitForm(values){
 
     const {subject_id,survey_id,action} = this.props.match.params;
-    //e.preventDefault();
-    //debugger;
+
     console.log(values);
     if(action=='add'){
-    this.props.addSurvey(subject_id,values).then((survey)=>{
-      this.props.history.push('/survey/'+subject_id+'/edit/'+survey.payload.data._id);
-
-    });
+      this.props.addSurvey(subject_id,values).then((survey)=>{
+        this.props.history.push('/survey/'+subject_id+'/edit/'+survey.payload.data._id);
+      });
     }else{
-    this.props.updateSurvey(subject_id,survey_id,values).then((survey)=>{
-
+      this.props.updateSurvey(subject_id,survey_id,values).then((survey)=>{
     });
     }
   }
@@ -160,7 +157,7 @@ class Survey extends Component {
           <section className="with-header-nospace flex flex-column align-center just-center">
 
 
-            <SurveyForm edit={action=='add'} onSubmitForm={this.submitForm.bind(this)} />
+            <SurveyForm name="surveyForm" survey={this.props.survey} edit={action=='add'} onSubmitForm={this.submitForm.bind(this)} />
             {this.renderDiary()}
 
           </section>

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 
 export default function (state={authenticated:false},action){
-  console.log(action);
+  //console.log(action);
   switch(action.type) {
     case AUTHENTICATED:
       return { ...state, authenticated: true };

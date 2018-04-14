@@ -36,7 +36,7 @@ class SubjectForm extends Component{
     const promise = this.props.saveSubject(_id,custom_field,preset);
 
     promise.subject.then(data=>{
-          this.props.history.push('/subjects');
+      this.props.history.push('/subjects');
     }).catch(error=>{
       alert('error occured');
     });

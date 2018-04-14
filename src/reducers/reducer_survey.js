@@ -74,7 +74,7 @@ export default function (state=initialState,action){
       newState = Object.assign({},state,{survey:state.survey,diaries:diaries});
 
 
-      console.log(newState);
+    //  console.log(newState);
      return newState;
     break;
     default:

@@ -1,48 +1,42 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import Moment from 'moment';
+import CollectionTitle from './collection-title';
+import _ from 'lodash';
+import {fetchPresets} from '../actions';
+import CheckboxGroup from './checkboxgroup';
 
-import {addSubject,saveSubject,fetchPresets} from '../actions';
-class SubjectForm extends Component{
-
+class SubjectForm extends Component {
   constructor(props){
     super(props);
-    this.state = {identifier:'0000',custom_field:'',preset:null,redirect:false,loaded:false};
-
-    this.submitForm = this.submitForm.bind(this);
+    let edit = false;
+    if(_.isUndefined(this.props.edit)){
+      edit = true;
+    }else{
+      edit = this.props.edit;
+    }
+    this.state = {
+      edit:edit
+    }
   }
 
   componentDidMount(){
-
-    this.props.fetchPresets().then(()=>{
-      var preset = this.props.presets[Object.keys(this.props.presets)[0]];
-
-      var preset_id = preset._id;
-      const promise = this.props.addSubject();
-
-      promise.subject.then(data=>{
-        //debugger;
-        this.setState({loaded:true,_id:data.data._id,preset:preset_id});
-      });
-
-    })
-
+  //  this.props.fetchPresets();
+  //  this.props.reset();
   }
 
-  submitForm(e){
-
-    e.preventDefault();
-    const{_id,custom_field,preset} = this.state;
-    const promise = this.props.saveSubject(_id,custom_field,preset);
-
-    promise.subject.then(data=>{
-      this.props.history.push('/subjects');
-    }).catch(error=>{
-      alert('error occured');
-    });
-
-
+  resetForm(){
+    this.props.reset() ;
+    this.setState({edit:false});
+    this.props.cancelForm();
   }
+
+  submitForm(values){
+    this.props.submitForm(values);
+  }
+
   renderOptions(){
     return _.map(this.props.presets,(preset)=>{
       return (
@@ -50,38 +44,65 @@ class SubjectForm extends Component{
         )
     });
   }
-  render(){
-    if(!this.state.loaded){
-      return (<div>fetching a subject number... please wait</div>)
-    }else{
-    return (
-      <div>
-        <h3>Créer un nouveau sujet</h3>
-        <form onSubmit={this.submitForm} className="col s12">
-          <div className="row">
-            <div className="input-field col s6">
-              <input placeholder="Placeholder" value={this.state._id} disabled  type="text" className="validate" />
-              <label htmlFor="first_name">Numero patient</label>
-            </div>
-            <div className="input-field col s6">
-              <input id="last_name" type="text" onChange={(e)=>{this.setState({custom_field:e.target.value})}}  className="validate" />
-              <label htmlFor="last_name">Champ personnalisé</label>
-            </div>
-            <div className="input-field col s6">
-              <select name="preset"  onChange={(e)=>{
-                    this.setState({preset:e.target.value})}}  className="breakdown" >
-                {this.renderOptions()}
-              </select>
-            </div>
-          </div>
-          <button className="btn">Create</button>
-          <Link to="/subjects" className="btn ">Cancel</Link>
-        </form>
-      </div>
 
-    );
+
+  render(){
+    if(this.state.edit){
+    const {handleSubmit} = this.props;
+
+      return (
+        <div className="preset-form">
+          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
+            <div className="row">
+                <Field name="_id" placeholder="-" label="Numero" disabled  type="text" component="input"></Field>
+            </div>
+            <div className="row">
+              <Field name="custom_field" className="" placeholder="Description" label="Description" component="input"></Field>
+            </div>
+            <Field name="preset"  className="breakdown"  component="select">
+              {this.renderOptions()}
+            </Field>
+            <button className="btn main">Enregistrer</button>
+            <button className="btn main" type="button" onClick={this.resetForm.bind(this)}>Annuler</button>
+          </form>
+        </div>
+
+      )
+    }else{
+      return (
+
+        <CollectionTitle title={"Sujet: "+this.props.subject._id} onClick={()=>{this.setState({edit:true})}}/>
+      )
     }
   }
 }
 
-export default connect((state)=>{return {presets:state.presets}},{addSubject,fetchPresets,saveSubject})(SubjectForm);
+
+function validate(values ){
+  const errors = {};
+  console.log(values);
+  return errors;
+}
+
+
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        form: ownProps.name,
+        initialValues: ownProps.subject,
+
+        // other props...
+    }
+}
+
+SubjectForm = compose(
+    connect(mapStateToProps,{fetchPresets}),
+    reduxForm({
+      validate,
+      enableReinitialize:true
+        //other redux-form options...
+    })
+)(SubjectForm);
+
+
+export default SubjectForm;

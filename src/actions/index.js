@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Moment from 'moment';
 import  history  from '../history';
+
+export const REGISTER= 'REGISTER';
 export const FETCH_SUBJECTS = 'FETCH_SUBJECTS';
 export const FETCH_SUBJECT = 'FETCH_SUBJECT';
 export const SEARCH_SUBJECTS = 'SEARCH_SUBJECTS';
@@ -102,10 +104,10 @@ export function checkSession(){
     try {
       var res = await  createRequest().get('/user/current');
       dispatch({ type: AUTHENTICATED });
-      debugger;
+
 //      history.push('/subjects');
     } catch(error) {
-      debugger;
+
       console.log(error);
       dispatch({
         type: AUTHENTICATION_ERROR,
@@ -167,6 +169,16 @@ export function updatePreset(values){
   }
 }
 
+
+export function register(values){
+
+  var request = createRequest().post('user/register/',values);
+  return {
+    type: REGISTER,
+    payload: request
+  }
+}
+
 export function addSubject(preset){
 
   var request = createRequest().post('subjects',{preset:preset});
@@ -207,7 +219,7 @@ export function fetchSubject(id){
 }
 
 export function fetchSurveys(subject_id){
-  debugger;
+  //debugger;
   const URL = `surveys/${subject_id}`;
   var request = createRequest().get(URL);
   return {

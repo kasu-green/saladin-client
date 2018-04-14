@@ -31,7 +31,7 @@ export default function (state=initialState,action){
         let ts = moment(e.date,'YYYY-MM-DD').unix();
         return ts ;
       },['asc']);
-
+      console.log(newState);
       return newState;
     break;
     case ADD_SURVEY_DAY: // append a new day to the list

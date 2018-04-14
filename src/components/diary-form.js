@@ -24,7 +24,27 @@ class DiaryForm extends Component {
           )
       });
     }
+    renderField (field){
+      debugger;
+      const {
+        input,
+        label,
+        className,
+        placeholder,
+        type,
+        props,
+        rest,
+        meta: { touched, error, warning }
+      } = field;
+      return (
+        <div>
+          <input {...input} placeholder={label} type={type}  {...props} {...rest} placeholder={placeholder} className={className}/>
+          {touched &&
+            ((error && <span>{error}</span>) ||
+              (warning && <span>{warning}</span>))}
 
+      </div>)
+    }
     render(){
 
       const {handleSubmit} = this.props;
@@ -37,7 +57,7 @@ class DiaryForm extends Component {
             </div>
 
             <div className="row">
-                <Field name="qty" className="qty" placeholder="Quantité (grammes / ml)"  type="text" component="input"></Field>
+                <Field name="qty" className="qty" placeholder="Quantité (grammes / ml)"  type="text" component={this.renderField}></Field>
             </div>
             <div className="row">
               <Field name="breakdown" className="breakdown" component="select">
@@ -59,7 +79,13 @@ class DiaryForm extends Component {
 function validate(values ){
   const errors = {};
   if(!values.food){
-    errors.food = "Select a food";
+    errors.food = "Sélectionnez un aliment en cliquant sur un élément déroulant";
+  }
+  if(!values.qty){
+    errors.qty = "Select a quantity";
+  }
+  if(isNaN(values.qty)){
+    errors.qty = "Enter a number (décimale = .)";
   }
   return errors;
 }

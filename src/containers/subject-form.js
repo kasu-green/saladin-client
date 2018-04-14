@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import SubjectForm from '../components/new-subject-form';
+import SubjectForm from '../components/subject-form';
 import {addSubject,saveSubject,fetchPresets} from '../actions';
 class SubjectFormContainer extends Component{
 

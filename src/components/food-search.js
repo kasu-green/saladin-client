@@ -51,7 +51,12 @@ class FoodSearch extends Component {
   }
 
    render() {
-     const {meta:{touched,invalid,pristine}} = this.props;
+     const {
+       input,
+       label,
+       type,
+       meta: { touched, error, warning }
+     } = this.props;
      return (
        <div className="search-bar food-search">
         <input
@@ -61,6 +66,9 @@ class FoodSearch extends Component {
           value = {this.state.term}
           onChange={(e)=>this.onInputChange(e.target.value)} />
           {this.renderAutoComplete()}
+          {touched &&
+            ((error && <span>{error}</span>) ||
+              (warning && <span>{warning}</span>))}
         </div>
     )
    }

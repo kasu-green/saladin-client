@@ -207,10 +207,18 @@ li.food{
 	font-weight:bold;
 
 }
+
+.info{
+	background-color:green;
+	color:white;
+	font-weight:bold;
+
+}
 .cgu h3{
 	padding-top:5px;
 }
 .cgu p{
+	font-size: $px12;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }

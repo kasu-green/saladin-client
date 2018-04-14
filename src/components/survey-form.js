@@ -37,6 +37,7 @@ class SurveyForm extends Component {
   submitForm(values){
     this.props.onSubmitForm(values);
     this.setState({edit:false});
+    this.props.reset();
   }
 
   renderField(field){
@@ -66,7 +67,7 @@ class SurveyForm extends Component {
 
 
   render(){
-
+    debugger;
     const {handleSubmit} = this.props;
     if(this.state.edit){
       return (
@@ -74,7 +75,7 @@ class SurveyForm extends Component {
 
           <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
             <div className="row">
-                <Field name="_date" placeholder="Date" label="Date de Consultation"  type="text" component={this.renderDatePicker}></Field>
+              <Field name="_date" placeholder="Date" label="Date de Consultation"  type="text" component={this.renderDatePicker}></Field>
             </div>
             <div className="row">
               <Field name="comment" className="" placeholder="Commentaire" label=" Commentaire" component="input"></Field>

@@ -43,6 +43,7 @@ class Survey extends Component {
 
   componentDidMount(){
     console.log('mount');
+    debugger;
     this.reloadComponentData();
     //if(typeof this.props.match.params.survey_id!="undefined"){
     //  this.props.fetchSurvey(this.props.match.params.subject_id,this.props.match.params.survey_id);
@@ -60,7 +61,10 @@ class Survey extends Component {
     if(this.props.match.params.survey_id != newProps.match.params.survey_id){
       this.props.fetchSurvey(newProps.match.subject_id,newProps.match.survey_id);
     }
-*/  if(newProps.match.params.action != this.props.match.params.action){
+*/
+debugger;
+if(newProps.match.params.action != this.props.match.params.action){
+
       this.reloadComponentData();
     }
   }

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch,browserHistory} from 'react-router-dom';
 
 import SubjectList from '../containers/subject-list';
 import SubjectForm from '../containers/subject-form';
-import SurveyList from './survey-list';
+import SurveyList from '../containers/survey-list';
 import Survey from './survey';
 import Diary from './diary';
 import Profile from './profile';

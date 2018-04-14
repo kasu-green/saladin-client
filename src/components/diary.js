@@ -102,7 +102,7 @@ class Diary extends Component {
     const {subject_id,survey_id,diary_date} = this.props.match.params;
     let date = moment(diary_date).format(this.props.locale.dateFormat);
     return (
-      <div>
+      <div className="diary">
         <Header title={date} backTo={()=>{this.props.history.push(`/survey/${subject_id}/edit/${survey_id}`)}}/>
         <section className="with-header-nospace flex flex-column align-center just-center">
 

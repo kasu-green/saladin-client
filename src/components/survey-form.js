@@ -6,6 +6,7 @@ import Moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
 import 'react-widgets/dist/css/react-widgets.css';
 import CollectionTitle from './collection-title';
+import DatePicker from 'react-date-picker';
 
 import {fetchPresets} from '../actions';
 import _ from 'lodash';
@@ -33,15 +34,6 @@ class SurveyForm extends Component {
 
 
   submitForm(values){
-  /*  const {subject_id} = this.props.match.params;
-    //e.preventDefault();
-    //debugger;
-    console.log(values);
-    this.props.addSurvey(subject_id,values).then((survey)=>{
-      this.props.history.push('/survey/'+subject_id+'/edit/'+survey.payload.data._id);
-
-    });*/
-
     this.props.onSubmitForm(values);
     this.setState({edit:false});
   }
@@ -57,9 +49,9 @@ class SurveyForm extends Component {
   }
   renderDatePicker(field){
     const {input:{value,onChange}, placeholder, defaultValue,rest, meta: {touched, error} }  = field;
-    //debugger;
+    debugger;
     return (<div>
-          <DateTimePicker onChange={onChange}  time={false} {...field.input} {...rest} onBlur={()=>{}}selected={defaultValue} />
+          <DatePicker locale="fr-FR" onChange={(date)=>{debugger;onChange}}  time={false} {...field.input} {...rest} onBlur={()=>{}} value={value}/>
           {touched && error && <span>{error}</span>}
     </div>);
   };

@@ -1,4 +1,4 @@
-
+$mobilepadding: 20px;
 .collection{
 
 	width:100%;
@@ -16,7 +16,7 @@
 
 .collection-title{
   min-height: 48px;
-  padding: 0px 10px;
+  padding: 0px $mobilepadding;
   background-color: #e1f5be;
   min-width: 100%;
 }
@@ -24,12 +24,19 @@
 .collection-item-detail{
 	min-height: 48px;
 	color: #808581;
-	padding: 0px 10px;
+	padding: 0px $mobilepadding;
 
 }
+.collection-subject{
+	.main-content{
+		width:40%;
+		min-width: 40%;
+	}
 
-
-
+	.center-content{
+		font-size: $px11;
+	}
+}
 .collection-item-detail .small_text{
 	color: #C6C8C3;
 }

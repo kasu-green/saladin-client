@@ -117,9 +117,6 @@ class Survey extends Component {
     });
   }
 
-  shouldDisableTile(calendar){
-
-  }
 
   renderDiary(){
     if(this.props.survey._id=="-1"){
@@ -133,7 +130,7 @@ class Survey extends Component {
     //debugger;
     return (
       <div className="survey">
-        <div className="row">
+        <div className="calendar">
           <Calendar
             onChange={(value)=>{this.newDiary(value)}}
             value={this.state.pickedDate}
@@ -160,13 +157,13 @@ class Survey extends Component {
     return (
       <div>
           <Header title={subject_id} backTo={()=>{this.props.history.push("/survey/"+subject_id)}}/>
-        <section className="with-header-nospace flex flex-column align-center just-center">
+          <section className="with-header-nospace flex flex-column align-center just-center">
 
 
-          <SurveyForm edit={action=='add'} onSubmitForm={this.submitForm.bind(this)}/>
-          {this.renderDiary()}
+            <SurveyForm edit={action=='add'} onSubmitForm={this.submitForm.bind(this)} />
+            {this.renderDiary()}
 
-      </section>
+          </section>
       </div>
 
     )

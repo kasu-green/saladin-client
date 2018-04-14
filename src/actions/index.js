@@ -45,6 +45,7 @@ export const createRequest=  (urlpart)=>{
 export const EMPTY_SURVEY =  {
     _id:-1,
     date: Moment().format('YYYY-MM-DD'),
+    _date: new Date(),
     subject_id: -1,
     comment:'',
     preset:null,
@@ -165,12 +166,12 @@ export function updatePreset(values){
   }
 }
 
-export function addSubject(){
+export function addSubject(preset){
 
-  var request = createRequest().post('subjects');
+  var request = createRequest().post('subjects',{preset:preset});
   return {
     type: ADD_SUBJECT,
-    subject: request
+    payload: request
   }
 }
 

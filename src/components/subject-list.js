@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchSubjects} from '../actions';
 import {Link} from 'react-router-dom';
-
-
 import SubjectCell from './subject-cell';
 import SearchBar from './search-bar';
 import Header from './header';
 import CollectionItem from './collection-item';
+
 class SubjectList extends Component{
 
 

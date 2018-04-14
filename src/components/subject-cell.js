@@ -13,11 +13,12 @@ class SubjectCell extends Component{
 
   render(){
     return (
-      <li className="collection-item" key={this.props.key}>
+      <li className="collection-item collection-subject" key={this.props.key}>
         <CollectionItem
+
           text={this.props.subject._id}
           subtext={this.props.subject.custom_field || '-'}
-          centerText={parseInt(this.props.subject.survey_count)+" enquêtes"}
+          centerText={parseInt(this.props.subject.survey_count)+" enquête(s)"}
           onClick={(e)=>{e.preventDefault(); this.selectSubject()}}
           icon="navigate_next"
         />

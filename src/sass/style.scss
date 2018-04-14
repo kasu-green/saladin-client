@@ -157,7 +157,7 @@ a {
 @import 'imports/pages/userpage';
 @import 'imports/pages/createform';
 @import 'imports/pages/createsurvey';
-
+@import 'imports/pages/diary';
 
 .autocomplete{
 	display:none;
@@ -225,4 +225,8 @@ li.food{
 		width:24px;
 		height:24px;
 	}
+}
+
+.calendar{
+	padding: 20px 20px;
 }

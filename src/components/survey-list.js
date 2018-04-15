@@ -44,7 +44,7 @@ class SurveyList extends Component {
     return (
       <div>
 
-        <Header title="Enquêtes" backTo={()=>{this.props.history.goBack()}}/>
+        <Header title="Enquêtes" backTo={()=>{this.props.history.push("/subjects")}}/>
         <section className="with-header-nospace flex flex-column align-center just-center">
 
           <SubjectForm

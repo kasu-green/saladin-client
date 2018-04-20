@@ -20,31 +20,34 @@ class Login extends Component{
     const {handleSubmit} = this.props;
     if(!this.props.auth.authenticated){
       return (
-        <div>
+        <div className="content_container">
           <h1>Bienvenue sur Saladin !</h1>
 
-          <span>{this.props.auth.error}</span>
+          <span className="error">{this.props.auth.error}</span>
           <form onSubmit={handleSubmit(this.submitForm.bind(this))}  className="flex flex-column">
             <Field name="email" placeholder="E-mail address"  component="input" type="input"/>
             <Field name="password" placeholder="Password"   component="input" type="password" />
-            <button className="submit">Se connecter</button>
-            <p id="switchForm">
-              Si vous ne possédez pas de compte,<br/>
-            <Link to="/register">cliquez-ici</Link>
+            <button className="submit login flex align-center just-end self-end">
+              se connecter
+              <i class="material-icons">navigate_next</i>
+            </button>
+            <p id="switchForm" className="self-center">
+              Si vous ne possédez pas de compte<br/>
+              <Link to="/register">cliquez-ici</Link>
             </p>
           </form>
-        </div>)
+        </div>
+      )
     }
   }
 
   renderLogged(){
     if(this.props.auth.authenticated){
       return(
-        <div>Welcome Back ! <br/>
+        <div>
+          Welcome Back ! <br/>
           <Link to="/subjects">Cliquez ici pour continuer</Link>
-         </div>
-
-
+        </div>
       )
     }
   }
@@ -53,7 +56,7 @@ class Login extends Component{
 
     return (
       <div>
-        <Header title="Se Connecter" noTools={true}/>
+        <Header title="Se connecter" noTools={true}/>
         <section className="cover flex flex-column align-center just-center">
           {this.renderForm()}
           {this.renderLogged()}

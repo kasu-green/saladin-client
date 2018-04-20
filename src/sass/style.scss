@@ -15,23 +15,6 @@
 @import 'imports/vars/reset';
 @import 'imports/vars/colors';
 
-*,
-*:after,
-*:before {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-html,
-body {
-	font-family: '---', Arial, verdana, arial, tahoma, sans-serif;
-	color: #000;
-	width: 100%;
-	font-size: 16px; /* Don't forget to select the good vars import at '0.1 - Fonts' */
-	line-height: 1.5em;
-}
-
-
 /* 0.1 - FONTS */
 /*
 	Font-size:
@@ -56,6 +39,8 @@ $serif-fonts: "Times New Roman", Georgia, serif;
 $sans-fonts: arial, verdana, tahoma, sans-serif;
 $monospace-fonts: "Courier New", Courier, monospace;
 
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
 // @font-face {
 // 	font-family: '---';
 // 	src: url('fonts/---.eot');
@@ -68,16 +53,32 @@ $monospace-fonts: "Courier New", Courier, monospace;
 // 	font-style: normal;
 // }
 
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-family: 'Open Sans', $sans-fonts;
+	color: #000;
+	width: 100%;
+	font-size: 16px; /* Don't forget to select the good vars import at '0.1 - Fonts' */
+	line-height: 1.5em;
+}
+
 h1 {
 	font-size: $px45;
   line-height: 1.5em;
-  font-family: $serif-fonts;
+  font-family: 'Roboto', $sans-fonts;
 }
 
 h2 {
 	font-size: $px26;
-  line-height: 1.5em;
-  font-family: $serif-fonts;
+  line-height: 1.2em;
+  font-family: 'Roboto', $sans-fonts;
 }
 
 h3 {
@@ -135,7 +136,7 @@ a {
 }
 
 .content_container {
-
+	margin: 0px 20px;
 }
 
 
@@ -221,14 +222,11 @@ li.food{
 }
 
 .error{
-	background-color:red;
-	color:white;
-	font-weight:bold;
-
+	color:$red;
 }
 
 .info{
-	background-color:green;
+	background-color: $main-green;
 	color:white;
 	font-weight:bold;
 

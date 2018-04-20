@@ -8,8 +8,6 @@ import  _ from 'lodash';
 export default class Header extends Component{
 
   renderBack(){
-
-
     const{backTo} = this.props;
     if(_.isUndefined(backTo) ){
       return (<img src="/img/salad.png" alt="logo Saladin"/>)
@@ -21,33 +19,30 @@ export default class Header extends Component{
     const{noTools} = this.props;
     if(_.isUndefined(noTools) || !noTools){
       return (
-    <div className="header_buttons">
-      <Link to="/profile">
-        <i className="material-icons">perm_identity</i>
-      </Link>
-    </div>)
+        <div className="header_buttons">
+          <Link to="/profile">
+            <i className="material-icons">person</i>
+          </Link>
+        </div>
+      )
     }
   }
   render(){
     const{title,noTools} = this.props;
     return (
 
-      <header>
-        <div className="flex flex-column just-center">
-        <nav className="flex align-center just-between">
-          <div className="flex">
-            {this.renderBack()}
-          </div>
-          <div className="flex">
-            <h2 className="self-center">{title}</h2>
-          </div>
-          <div className="flex">
-          {this.renderTools()}
+      <header className="flex flex-column just-center">
 
+          <nav className="flex align-center just-between">
+            <div className="flex align-start">
+              {this.renderBack()}
+              <h2>{title}</h2>
+            </div>
+            <div>
+              {this.renderTools()}
+            </div>
+          </nav>
 
-          </div>
-        </nav>
-        </div>
       </header>
     );
   }

@@ -25,8 +25,12 @@ export default class CollectionItem extends Component{
 
   render(){
     const {text,subtext,icon,onClick} = this.props;
+    let classes = "collection-item-detail flex just-between";
+    if(this.props.color){
+      classes+= 'collection-item-color-'+this.props.color;
+    }
     return (
-      <div onClick={onClick}  className="collection-item-detail flex just-between">
+      <div onClick={onClick}  className={classes}>
         <div className="flex wrap flex-column main-content self-base">
           <div>{text}</div>
           <div className="small_text">{subtext || ' '}</div>

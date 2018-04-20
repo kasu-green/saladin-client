@@ -1,6 +1,7 @@
 var path = require( "path" );
 var webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+console.log('Development')
 module.exports = function(env) {
   return {
     devtool: 'source-map',
@@ -14,7 +15,9 @@ module.exports = function(env) {
       path: path.resolve(__dirname, 'dist')
     },
     plugins: [
-
+      new webpack.DefinePlugin({
+        "API_URL": JSON.stringify("http://localhost:3000/")
+      }),
       new HtmlWebpackPlugin({
 
           template:'index.html'

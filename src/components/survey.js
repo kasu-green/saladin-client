@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import {addSurvey,addSurveyDay,fetchSurvey,updateSurvey} from '../actions';
+import {addSurvey,addSurveyDay,fetchSurvey,updateSurvey,fetchComponents,fetchPresets} from '../actions';
 import 'react-widgets/dist/css/react-widgets.css';
 
 import Moment from 'moment';
@@ -12,7 +12,8 @@ import Calendar from 'react-calendar';
 import Header from './header';
 import SurveyForm from './survey-form';
 import CollectionItem from './collection-item';
-
+import FoodSummary from './food-summary';
+import CollectionTitle from './collection-title';
 Moment.locale('fr');
 momentLocalizer();
 
@@ -30,20 +31,27 @@ class Survey extends Component {
 
   reloadComponentData (){
     const {subject_id,survey_id,action} = this.props.match.params;
-    if(action == 'edit'){
+    this.props.fetchComponents().then(()=>{
 
-      const promise = this.props.fetchSurvey(subject_id,survey_id);
+      return this.props.fetchPresets();
 
-      //debugger;
-      promise.then(()=>{
-        this.setState({loaded:true});
-      });
-    }
+    }).then(()=>{
+      if(action == 'edit'){
+
+        const promise = this.props.fetchSurvey(subject_id,survey_id);
+
+        //debugger;
+        promise.then(()=>{
+          this.setState({loaded:true});
+        });
+      }
+
+    })
   }
 
   componentDidMount(){
     console.log('mount');
-    debugger;
+  //  debugger;
     this.reloadComponentData();
     //if(typeof this.props.match.params.survey_id!="undefined"){
     //  this.props.fetchSurvey(this.props.match.params.subject_id,this.props.match.params.survey_id);
@@ -62,7 +70,7 @@ class Survey extends Component {
       this.props.fetchSurvey(newProps.match.subject_id,newProps.match.survey_id);
     }
 */
-debugger;
+//debugger;
 if(newProps.match.params.action != this.props.match.params.action){
 
       this.reloadComponentData();
@@ -145,7 +153,7 @@ if(newProps.match.params.action != this.props.match.params.action){
             }}
           />
         </div>
-
+        <CollectionTitle title="Carnets alimentaires"/>
         <ul className="collection">
           {this.renderDiariesList()}
         </ul>
@@ -164,6 +172,8 @@ if(newProps.match.params.action != this.props.match.params.action){
             <SurveyForm name="surveyForm" survey={this.props.survey} edit={action=='add'} onSubmitForm={this.submitForm.bind(this)} />
             {this.renderDiary()}
 
+            <CollectionTitle title="Moyennes de l'enquête"/>
+            <FoodSummary summary={this.props.survey.summary} components={this.props.components} locale={this.props.locale} preset={this.props.presets[this.props.survey.preset]}/>
           </section>
       </div>
 
@@ -174,8 +184,11 @@ if(newProps.match.params.action != this.props.match.params.action){
 Survey =   connect(
     state => ({
     survey : state.survey,
-    subject:state.subject
-  }),{addSurvey,addSurveyDay,fetchSurvey,updateSurvey}
+    subject:state.subject,
+    components:state.components,
+    locale:state.locale,
+    presets:state.presets
+  }),{addSurvey,addSurveyDay,fetchSurvey,updateSurvey,fetchComponents,fetchPresets}
   )(Survey);
 
 export default Survey;

@@ -2,7 +2,7 @@ var path = require( "path" );
 var webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-console.log(__dirname);
+console.log('Production')
 module.exports = function(env) {
   return {
     entry: [
@@ -15,6 +15,9 @@ module.exports = function(env) {
       path: path.resolve(__dirname, 'dist')
     },
     plugins: [
+      new webpack.DefinePlugin({
+        "API_URL": JSON.stringify("http://it.geekagency.ch:3000/")
+      }),
       new CopyWebpackPlugin([{
         from: path.resolve(__dirname, 'img'), to: path.resolve(__dirname, 'dist/img')
       }]),

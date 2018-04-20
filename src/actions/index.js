@@ -29,7 +29,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const UNAUTHENTICATED = 'UNAUTHENTICATED';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
-export const ROOT_URL= 'http://localhost:3000/';
+export const ROOT_URL= API_URL;
 export const API_KEY = '?key=abcdef';
 export const getAPIUrl=(urlpart)=>{
   return `${ROOT_URL}${urlpart}${API_KEY}`;

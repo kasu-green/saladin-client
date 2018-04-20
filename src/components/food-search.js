@@ -37,7 +37,9 @@ class FoodSearch extends Component {
 
   renderAutoComplete(){
 
-
+    if(!this.props.foods.data){
+      return ;
+    }
     const items = this.props.foods.data.map(food=>{
       return (
         <li onClick={(e)=>{this.selectElement(food)}} ref={food._id} key={food._id}>{this.translatedName(food)}</li>

@@ -181,6 +181,25 @@ li.breakdown{
 	background-color:green;
 	font-weight:bolder;
 }
+
+li.breakdown .collection-item-detail .main-content{
+	color: white;
+}
+li.food .collection-item-detail .main-content{
+	color: black;
+}
+li.food .collection-item-detail .small_text{
+	color: black;
+}
+
+li.food .collection-item-detail .small_text, li.breakdown .collection-item-detail .small_text{
+	font-size: $px11;
+}
+
+li.food .collection-item-detail .center-content{
+	color: black;
+}
+
 li.food{
 	background-color:$light-green;
 }

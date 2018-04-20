@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {authenticate} from '../actions';
+import Header from './header';
 
 class Login extends Component{
   constructor(props){
@@ -51,10 +52,14 @@ class Login extends Component{
   render(){
 
     return (
-      <section className="cover flex flex-column align-center just-center">
-        {this.renderForm()}
-        {this.renderLogged()}
-      </section>)
+      <div>
+        <Header title="Se Connecter" noTools={true}/>
+        <section className="cover flex flex-column align-center just-center">
+          {this.renderForm()}
+          {this.renderLogged()}
+        </section>
+      </div>
+    )
   }
 }
 

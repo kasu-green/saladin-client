@@ -30,25 +30,16 @@ class RegisterForm extends Component {
     const {handleSubmit} = this.props;
 
       return (
-        <div className="preset-form">
-          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
-            <div className="row">
-                <Field name="email" placeholder="Email" label="Email"  type="text" component="input"></Field>
-            </div>
-            <div className="row">
-              <Field name="password" className="" placeholder="Password" label="Description" type="password" component="input"></Field>
-            </div>
-            <div className="row">
-              <Field name="password_confirm" className="" placeholder="Password confirmation" label="Description" type="password"  component="input"></Field>
-            </div>
-
-            <button className="btn main">Inscription</button>
-            <button className="btn main" type="button" onClick={this.resetForm.bind(this)}>Annuler</button>
-          </form>
-        </div>
-
+        <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="register-form">
+          <Field name="email" placeholder="Email" label="Email"  type="text" component="input"></Field>
+          <Field name="password" className="" placeholder="Password" label="Description" type="password" component="input"></Field>
+          <Field name="password_confirm" className="" placeholder="Password confirmation" label="Description" type="password"  component="input"></Field>
+          <div className="flex just-between align-base">
+            <button className="cancel" type="button" onClick={this.resetForm.bind(this)}>Annuler</button>
+            <button className="signup">Inscription</button>
+          </div>
+        </form>
       )
-
   }
 }
 

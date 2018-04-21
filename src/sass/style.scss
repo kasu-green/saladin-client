@@ -76,26 +76,25 @@ h1 {
 }
 
 h2 {
-	font-size: $px26;
+	font-size: $px28;
   line-height: 1.2em;
   font-family: 'Roboto', $sans-fonts;
 }
 
 h3 {
 	font-size: $px24;
+	line-height: 1.2em;
+	font-family: 'Roboto', $sans-fonts;
 }
 
 h4 {
-
+	font-size: $px20;
+	line-height: 1.2em;
 }
 
 p {
 
 }
-
-// strong {
-// 	font-family: '---';
-// }
 
 a {
 	text-decoration: none;
@@ -231,14 +230,20 @@ li.food{
 	font-weight:bold;
 
 }
+
+/* CONDITIONS GENERALES D'UTILISATIONS */
+.cgu {
+	margin: 0px 20px;
+}
 .cgu h3{
-	padding-top:5px;
+	padding-top:15px;
 }
 .cgu p{
 	font-size: $px12;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px 0px;
 }
+
+
 
 .presets-list{
 	width:100%;

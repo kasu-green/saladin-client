@@ -91,7 +91,7 @@ class PresetForm extends Component {
     if(this.state.edit){ // in edit mode we display
       return (
         <div className="preset-form">
-          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="col s12">
+          <form onSubmit={handleSubmit(this.submitForm.bind(this))} className="">
             <div className="row">
                 <Field name="name" placeholder="Nom" label="Nom"  type="text" component="input"></Field>
             </div>

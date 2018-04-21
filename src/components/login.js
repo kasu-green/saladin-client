@@ -29,7 +29,7 @@ class Login extends Component{
             <Field name="password" placeholder="Password"   component="input" type="password" />
             <button className="submit login flex align-center just-end self-end">
               se connecter
-              <i class="material-icons">navigate_next</i>
+              <i className="material-icons">navigate_next</i>
             </button>
             <p id="switchForm" className="self-center">
               Si vous ne possédez pas de compte<br/>

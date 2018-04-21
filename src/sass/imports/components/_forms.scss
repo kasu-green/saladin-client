@@ -20,6 +20,8 @@ input,select {
   padding: 0px 10px;
 }
 
+/* LOGIN */
+
 button.login {
   color: $text-gray;
   border: none;
@@ -41,4 +43,33 @@ p#switchForm{
     border-bottom: solid 1px;
     padding-bottom: 1px;
   }
+}
+
+/* CGU */
+button.cgubtn {
+  background-color: $main-green;
+  color: white;
+  padding: 7px 25px;
+  margin: 20px auto;
+  display: block;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px 0px $ultra-light-gray;
+}
+
+button.cancel {
+  border: none;
+  box-shadow: none;
+  background: none;
+  color: $red;
+  margin-top: 10px;
+}
+
+button.signup {
+  background: $main-green;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 15px;
+  text-transform: uppercase;
 }

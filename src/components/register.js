@@ -32,14 +32,14 @@ class Register extends Component{
     const {register,registered,error} = this.state;
 
     if(error&& register){
-      return(<div class="error">Une erreur est survenue pendant l'enregistrement</div>)
+      return(<div className="error">Une erreur est survenue pendant l'enregistrement</div>)
     }
   }
   renderSuccess(){
     const {register,registered,error} = this.state;
 
     if(registered&& register){
-      return(<div class="info">Vous êtes enregistrés, Vous pouvez désormais vous <Link to="/">connecter</Link></div>)
+      return(<div className="info">Vous êtes enregistrés, Vous pouvez désormais vous <Link to="/">connecter</Link></div>)
     }
   }
 

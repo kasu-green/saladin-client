@@ -30,14 +30,14 @@ class Register extends Component{
 
   renderError(){
     const {register,registered,error} = this.state;
-
+    debugger;
     if(error&& register){
       return(<div className="error">Une erreur est survenue pendant l'enregistrement</div>)
     }
   }
   renderSuccess(){
     const {register,registered,error} = this.state;
-
+    debugger;
     if(registered&& register){
       return(<div className="info">Vous êtes enregistrés, Vous pouvez désormais vous <Link to="/">connecter</Link></div>)
     }
@@ -49,6 +49,9 @@ class Register extends Component{
     if(register){
       return (
         <section className="cover flex flex-column align-center just-center">
+          {this.renderError()}
+          {this.renderSuccess()}
+          
           <RegisterForm
             name="register"
             submitForm={(values)=>{this.register(values)}}
@@ -109,8 +112,7 @@ class Register extends Component{
 
         {this.renderCGU()}
         {this.renderRegisterForm()}
-        {this.renderError()}
-        {this.renderSuccess()}
+
 
     </div>)
   }

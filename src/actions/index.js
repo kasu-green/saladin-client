@@ -71,8 +71,9 @@ export function authenticate(email,password){
       const URL = `${ROOT_URL}user/authenticate/`;
       const res = await axios.post(URL,{email,password});
       debugger;
-      dispatch({ type: AUTHENTICATED });
+
       localStorage.setItem('token', res.data.token);
+      dispatch({ type: AUTHENTICATED });
     //  history.push('/secret');
     //  history.push('/subjects');
     } catch(error) {

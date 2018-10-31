@@ -2,20 +2,29 @@
 /**
  * Table of Contents
  * 0 -   BASE
-		0.1 -   Fonts
-		0.2 -   Flexbox
+ 		0.1 - 	Vars
+		0.2 -   Fonts
 		0.3 -   General classes
 				- Containers
 				- Covers
 				- Backgrounds
 				- Dynamic lists
 		0.4 -	Prefixers
+
+	2 -		IMPORTS
+		2.1 -		Components
+		2.2 -		Pages
+
+	ZZ -	OTHERS
+
 **/
 
+/* 0.1 - VARS */
 @import 'imports/vars/reset';
 @import 'imports/vars/colors';
+@import 'imports/vars/flexbox';
 
-/* 0.1 - FONTS */
+/* 0.2 - FONTS */
 /*
 	Font-size:
 	Fonts are converted in 'rem' to keep real proportions of body font-size,
@@ -39,7 +48,7 @@ $serif-fonts: "Times New Roman", Georgia, serif;
 $sans-fonts: arial, verdana, tahoma, sans-serif;
 $monospace-fonts: "Courier New", Courier, monospace;
 
-
+// import Open sans and Roboto
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
 // @font-face {
 // 	font-family: '---';
@@ -93,7 +102,7 @@ h4 {
 }
 
 p {
-
+	font-size: $px12;
 }
 
 a {
@@ -104,10 +113,6 @@ a {
   text-decoration: underline;
 }
 
-
-
-/* 0.2 - FLEXBOX */
-@import 'imports/vars/flexbox';
 
 /* 0.3 - GENERAL CLASSES */
 .background {
@@ -138,26 +143,39 @@ a {
 	margin: 0px 20px;
 }
 
+.separate {
+	margin: 30px 0px;
+}
 
 
-/* 04 - PREFIXER */
+
+/* 0.4 - PREFIXER */
 .transition {
 	-webkit-transition: all ease-in 0.2s;
 	transition: all ease-in 0.2s;
 }
 
+/* 2 - IMPORTS */
+/* 2.1 - Components */
 
-@import 'imports/components/header';
 @import 'imports/components/autocomplete';
-@import 'imports/components/forms';
-@import 'imports/components/diary';
-@import 'imports/components/sections';
 @import 'imports/components/collections';
-@import 'imports/pages/survey-form';
-@import 'imports/pages/userpage';
+@import 'imports/components/diary';
+@import 'imports/components/forms';
+@import 'imports/components/header';
+@import 'imports/components/sections';
+
+
+/* 2.2 - Pages */
+@import 'imports/pages/cgu';
 @import 'imports/pages/createform';
 @import 'imports/pages/createsurvey';
 @import 'imports/pages/diary';
+@import 'imports/pages/survey-form';
+@import 'imports/pages/userpage';
+
+
+/* ZZ - OTHERS */
 
 .autocomplete{
 	display:none;
@@ -231,17 +249,7 @@ li.food{
 
 }
 
-/* CONDITIONS GENERALES D'UTILISATIONS */
-.cgu {
-	margin: 0px 20px;
-}
-.cgu h3{
-	padding-top:15px;
-}
-.cgu p{
-	font-size: $px12;
-	padding: 10px 0px;
-}
+
 
 
 

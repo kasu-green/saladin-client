@@ -39,7 +39,15 @@ module.exports = function(env) {
           { test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader?limit=100000' },
         {
           test: /\.scss$/,
-          loaders: ['style-loader','css-loader','sass-loader']
+          loaders: ['style-loader',{
+                loader: "css-loader", options: {
+                    sourceMap: true
+                }
+            },{
+                loader: "sass-loader", options: {
+                    sourceMap: true
+                }
+            }]
         },
         {
           loader: "html-loader",
